@@ -35,6 +35,24 @@
 							"method": "GET",
 							"headers": {}
 						}
+					},
+					{
+						"name": "Crimes",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "GET https://data.cityofchicago.org/resource/crimes.json?$select=:id,date, year, community_area, primary_type, arrest, domestic",
+							"method": "GET",
+							"headers": {}
+						}
 					}
 				],
 				"annotations": []

@@ -32,8 +32,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"url": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count",
-							"method": "GET",
-							"headers": {}
+							"method": "GET"
 						}
 					},
 					{
@@ -50,8 +49,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"url": "GET https://data.cityofchicago.org/resource/crimes.json?$select=:id,date, year, community_area, primary_type, arrest, domestic",
-							"method": "GET",
-							"headers": {}
+							"method": "GET"
 						}
 					}
 				],
