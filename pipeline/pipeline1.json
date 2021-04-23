@@ -52,6 +52,23 @@
 					"url": "https://data.cityofchicago.org/resource/building-permits.json?$select=id,permit_type,issue_date,community_area",
 					"method": "GET"
 				}
+			},
+			{
+				"name": "Affordable Housing",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$select=community_area,community_area_number,property_type,units",
+					"method": "GET"
+				}
 			}
 		],
 		"annotations": []
