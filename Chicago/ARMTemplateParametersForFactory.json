@@ -4,6 +4,12 @@
 	"parameters": {
 		"factoryName": {
 			"value": "Chicago"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"TrafficBlob_connectionString": {
+			"value": ""
 		}
 	}
 }

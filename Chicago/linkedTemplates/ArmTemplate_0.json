@@ -6,6 +6,14 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "Chicago"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"TrafficBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TrafficBlob'"
 		}
 	},
 	"variables": {
@@ -13,7 +21,56 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TrafficBlob')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('TrafficBlob_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/traffic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "TrafficBlob",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/TrafficBlob')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/chicago_dataflow')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -33,7 +90,14 @@
 						"typeProperties": {
 							"url": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count",
 							"method": "GET",
-							"headers": {}
+							"headers": {},
+							"datasets": [
+								{
+									"referenceName": "traffic",
+									"type": "DatasetReference",
+									"parameters": {}
+								}
+							]
 						}
 					},
 					{
@@ -49,7 +113,43 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "GET https://data.cityofchicago.org/resource/crimes.json?$select=:id,date, year, community_area, primary_type, arrest, domestic",
+							"url": "https://data.cityofchicago.org/resource/crimes.json?$select=id,date, year, community_area, primary_type, arrest, domestic",
+							"method": "GET",
+							"headers": {}
+						}
+					},
+					{
+						"name": "Permits",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://data.cityofchicago.org/resource/building-permits.json?$select=id,permit_type,issue_date,community_area",
+							"method": "GET",
+							"headers": {}
+						}
+					},
+					{
+						"name": "Affordable Housing",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$select=community_area,community_area_number,property_type,units",
 							"method": "GET",
 							"headers": {}
 						}
@@ -57,7 +157,9 @@
 				],
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/traffic')]"
+			]
 		}
 	]
 }
