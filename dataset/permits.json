@@ -1,0 +1,19 @@
+{
+	"name": "permits",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PermitsBlob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "permit",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}

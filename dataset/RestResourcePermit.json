@@ -1,0 +1,12 @@
+{
+	"name": "RestResourcePermit",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestServicePermit",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
