@@ -10,7 +10,11 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "Traffic",
+				"fileName": {
+					"value": "@utcnow()",
+					"type": "Expression"
+				},
+				"folderPath": "traffic",
 				"container": "chicago"
 			}
 		},
