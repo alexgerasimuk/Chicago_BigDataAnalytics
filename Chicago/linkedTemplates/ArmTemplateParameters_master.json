@@ -11,6 +11,9 @@
 		"TrafficBlob_connectionString": {
 			"value": ""
 		},
+		"RestServiceTraffic_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count"
+		},
 		"containerUri": {
 			"value": ""
 		},

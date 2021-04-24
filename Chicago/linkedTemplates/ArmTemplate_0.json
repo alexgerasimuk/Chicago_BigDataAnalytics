@@ -14,6 +14,10 @@
 		"TrafficBlob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrafficBlob'"
+		},
+		"RestServiceTraffic_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count"
 		}
 	},
 	"variables": {
@@ -34,6 +38,21 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/RestServiceTraffic')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('RestServiceTraffic_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TrafficBlob')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -45,6 +64,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResourceTraffic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceTraffic",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": ""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceTraffic')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/traffic')]",
@@ -60,6 +99,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"folderPath": "traffic",
 						"container": "chicago"
 					}
 				},
@@ -76,8 +116,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Traffic",
-						"type": "WebActivity",
+						"name": "Copy traffic",
+						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
@@ -88,76 +128,89 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count",
-							"method": "GET",
-							"headers": {},
-							"datasets": [
-								{
-									"referenceName": "traffic",
-									"type": "DatasetReference",
-									"parameters": {}
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET"
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings",
+									"filePattern": "arrayOfObjects"
 								}
-							]
-						}
-					},
-					{
-						"name": "Crimes",
-						"type": "WebActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['time']"
+										},
+										"sink": {
+											"path": "time"
+										}
+									},
+									{
+										"source": {
+											"path": "$['region_id']"
+										},
+										"sink": {
+											"path": "region_id"
+										}
+									},
+									{
+										"source": {
+											"path": "$['speed']"
+										},
+										"sink": {
+											"path": "speed"
+										}
+									},
+									{
+										"source": {
+											"path": "$['region']"
+										},
+										"sink": {
+											"path": "region"
+										}
+									},
+									{
+										"source": {
+											"path": "$['bus_count']"
+										},
+										"sink": {
+											"path": "bus_count"
+										}
+									}
+								]
+							}
 						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://data.cityofchicago.org/resource/crimes.json?$select=id,date, year, community_area, primary_type, arrest, domestic",
-							"method": "GET",
-							"headers": {}
-						}
-					},
-					{
-						"name": "Permits",
-						"type": "WebActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://data.cityofchicago.org/resource/building-permits.json?$select=id,permit_type,issue_date,community_area",
-							"method": "GET",
-							"headers": {}
-						}
-					},
-					{
-						"name": "Affordable Housing",
-						"type": "WebActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$select=community_area,community_area_number,property_type,units",
-							"method": "GET",
-							"headers": {}
-						}
+						"inputs": [
+							{
+								"referenceName": "RestResourceTraffic",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "traffic",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"annotations": []
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/RestResourceTraffic')]",
 				"[concat(variables('factoryId'), '/datasets/traffic')]"
 			]
 		}
