@@ -77,16 +77,9 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "Copy traffic",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Traffic",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -102,11 +95,57 @@
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "arrayOfObjects"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['time']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['region_id']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['speed']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['region']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['bus_count']"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "RestResourceTraffic",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "traffic",
 						"type": "DatasetReference"
 					}
 				]
