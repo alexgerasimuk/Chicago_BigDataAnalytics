@@ -38,26 +38,41 @@
 							{
 								"source": {
 									"path": "$['time']"
+								},
+								"sink": {
+									"path": "time"
 								}
 							},
 							{
 								"source": {
 									"path": "$['region_id']"
+								},
+								"sink": {
+									"path": "region_id"
 								}
 							},
 							{
 								"source": {
 									"path": "$['speed']"
+								},
+								"sink": {
+									"path": "speed"
 								}
 							},
 							{
 								"source": {
 									"path": "$['region']"
+								},
+								"sink": {
+									"path": "region"
 								}
 							},
 							{
 								"source": {
 									"path": "$['bus_count']"
+								},
+								"sink": {
+									"path": "bus_count"
 								}
 							}
 						]
