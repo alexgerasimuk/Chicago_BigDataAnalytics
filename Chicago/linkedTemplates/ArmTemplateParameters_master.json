@@ -11,8 +11,29 @@
 		"TrafficBlob_connectionString": {
 			"value": ""
 		},
+		"CrimesBlob_connectionString": {
+			"value": ""
+		},
+		"PermitsBlob_connectionString": {
+			"value": ""
+		},
+		"AffordableHpusingBlob_connectionString": {
+			"value": ""
+		},
+		"AffordableHousingBlob_connectionString": {
+			"value": ""
+		},
 		"RestServiceTraffic_properties_typeProperties_url": {
 			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count"
+		},
+		"RestServiceCrimes_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/crimes.json?$select=id,date, year, community_area, primary_type, arrest, domestic"
+		},
+		"RestServicePermit_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/building-permits.json?$select=id,permit_type,issue_date,community_area"
+		},
+		"RestServiceAffordableHousing_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$select=community_area,community_area_number,property_type,units"
 		},
 		"containerUri": {
 			"value": ""

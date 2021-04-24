@@ -15,9 +15,37 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrafficBlob'"
 		},
+		"CrimesBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CrimesBlob'"
+		},
+		"PermitsBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'PermitsBlob'"
+		},
+		"AffordableHpusingBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AffordableHpusingBlob'"
+		},
+		"AffordableHousingBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AffordableHousingBlob'"
+		},
 		"RestServiceTraffic_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count"
+		},
+		"RestServiceCrimes_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$select=id,date, year, community_area, primary_type, arrest, domestic"
+		},
+		"RestServicePermit_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/building-permits.json?$select=id,permit_type,issue_date,community_area"
+		},
+		"RestServiceAffordableHousing_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$select=community_area,community_area_number,property_type,units"
 		},
 		"containerUri": {
 			"type": "string",
@@ -52,8 +80,29 @@
 					"TrafficBlob_connectionString": {
 						"value": "[parameters('TrafficBlob_connectionString')]"
 					},
+					"CrimesBlob_connectionString": {
+						"value": "[parameters('CrimesBlob_connectionString')]"
+					},
+					"PermitsBlob_connectionString": {
+						"value": "[parameters('PermitsBlob_connectionString')]"
+					},
+					"AffordableHpusingBlob_connectionString": {
+						"value": "[parameters('AffordableHpusingBlob_connectionString')]"
+					},
+					"AffordableHousingBlob_connectionString": {
+						"value": "[parameters('AffordableHousingBlob_connectionString')]"
+					},
 					"RestServiceTraffic_properties_typeProperties_url": {
 						"value": "[parameters('RestServiceTraffic_properties_typeProperties_url')]"
+					},
+					"RestServiceCrimes_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceCrimes_properties_typeProperties_url')]"
+					},
+					"RestServicePermit_properties_typeProperties_url": {
+						"value": "[parameters('RestServicePermit_properties_typeProperties_url')]"
+					},
+					"RestServiceAffordableHousing_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceAffordableHousing_properties_typeProperties_url')]"
 					}
 				}
 			},
