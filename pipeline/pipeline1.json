@@ -38,7 +38,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "GET https://data.cityofchicago.org/resource/crimes.json?$select=:id,date, year, community_area, primary_type, arrest, domestic",
+					"url": "https://data.cityofchicago.org/resource/crimes.json?$select=:id,date, year, community_area, primary_type, arrest, domestic",
 					"method": "GET"
 				}
 			},
