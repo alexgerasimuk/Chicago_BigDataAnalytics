@@ -1,0 +1,19 @@
+{
+	"name": "affordableHousing",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AffordableHousingBlob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "affordableHousing",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}

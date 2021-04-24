@@ -1,0 +1,12 @@
+{
+	"name": "RestResourceAffordableHousing",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestServiceAffordableHousing",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
