@@ -16,7 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count",
-					"method": "GET"
+					"method": "GET",
+					"datasets": [
+						{
+							"referenceName": "traffic",
+							"type": "DatasetReference"
+						}
+					]
 				}
 			},
 			{
@@ -60,7 +66,7 @@
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
-					"retryIntervalInSeconds": 0,
+					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
 					"secureInput": false
 				},
