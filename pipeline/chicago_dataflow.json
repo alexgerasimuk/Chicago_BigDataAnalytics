@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "chicago_dataflow",
 	"properties": {
 		"activities": [
 			{
@@ -38,7 +38,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://data.cityofchicago.org/resource/crimes.json?$select=:id,date, year, community_area, primary_type, arrest, domestic",
+					"url": "https://data.cityofchicago.org/resource/crimes.json?$select=id,date, year, community_area, primary_type, arrest, domestic",
 					"method": "GET"
 				}
 			},
