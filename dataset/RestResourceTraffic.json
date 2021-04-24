@@ -1,0 +1,15 @@
+{
+	"name": "RestResourceTraffic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestServiceTraffic",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": ""
+		},
+		"schema": []
+	}
+}
