@@ -14,6 +14,25 @@
 				"container": "chicago"
 			}
 		},
-		"schema": {}
+		"schema": {
+			"type": "object",
+			"properties": {
+				"time": {
+					"type": "string"
+				},
+				"region_id": {
+					"type": "string"
+				},
+				"speed": {
+					"type": "string"
+				},
+				"region": {
+					"type": "string"
+				},
+				"bus_count": {
+					"type": "string"
+				}
+			}
+		}
 	}
 }
