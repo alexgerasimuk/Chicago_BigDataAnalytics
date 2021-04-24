@@ -1,0 +1,12 @@
+{
+	"name": "RestServicePermit",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://data.cityofchicago.org/resource/building-permits.json?$select=id,permit_type,issue_date,community_area",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
