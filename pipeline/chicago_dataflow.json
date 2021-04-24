@@ -91,6 +91,111 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy crimes",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "arrayOfObjects"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"path": "id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['date']"
+								},
+								"sink": {
+									"path": "date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['year']"
+								},
+								"sink": {
+									"path": "year"
+								}
+							},
+							{
+								"source": {
+									"path": "$['community_area']"
+								},
+								"sink": {
+									"path": "community_area"
+								}
+							},
+							{
+								"source": {
+									"path": "$['primary_type']"
+								},
+								"sink": {
+									"path": "primary_type"
+								}
+							},
+							{
+								"source": {
+									"path": "$['arrest']"
+								},
+								"sink": {
+									"path": "arrest"
+								}
+							},
+							{
+								"source": {
+									"path": "$['domestic']"
+								},
+								"sink": {
+									"path": "domestic"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "RestResourceCrimes",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "crimes",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []

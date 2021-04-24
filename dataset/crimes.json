@@ -1,0 +1,19 @@
+{
+	"name": "crimes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CrimesBlob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "crime",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}
