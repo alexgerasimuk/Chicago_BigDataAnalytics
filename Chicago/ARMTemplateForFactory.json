@@ -274,7 +274,11 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "@dataset().TargetFileName",
+						"fileName": {
+							"value": "@dataset().TargetFileName",
+							"type": "Expression"
+						},
+						"folderPath": "traffic",
 						"container": "chicago"
 					}
 				},
@@ -537,7 +541,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"TargetFileName": {
-										"value": "@traffic/concat('traffic_', formatDateTime(dataset().WindowStartTime, 'MM-dd-yyyy_hh-mm-ss'))",
+										"value": "@concat('traffic_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))",
 										"type": "Expression"
 									}
 								}
