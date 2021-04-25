@@ -273,11 +273,20 @@
 					"referenceName": "AffordableHousingBlob",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"AFFileName": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "Json",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().AFFileName",
+							"type": "Expression"
+						},
 						"folderPath": "affordableHousing",
 						"container": "chicago"
 					}
@@ -313,11 +322,20 @@
 					"referenceName": "CrimesBlob",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"CrimesFileName": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "Json",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().CrimesFileName",
+							"type": "Expression"
+						},
 						"folderPath": "crime",
 						"container": "chicago"
 					}
@@ -362,11 +380,20 @@
 					"referenceName": "PermitsBlob",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"PermitsFileName": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "Json",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().PermitsFileName",
+							"type": "Expression"
+						},
 						"folderPath": "permit",
 						"container": "chicago"
 					}
@@ -651,7 +678,9 @@
 							{
 								"referenceName": "crimes",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"CrimesFileName": "@concat('crimes_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
+								}
 							}
 						]
 					},
@@ -733,7 +762,9 @@
 							{
 								"referenceName": "permits",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"PermitsFileName": "@concat('permits_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
+								}
 							}
 						]
 					},
@@ -815,7 +846,9 @@
 							{
 								"referenceName": "affordableHousing",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"AFFileName": "@concat('affordableHousing_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
+								}
 							}
 						]
 					}
