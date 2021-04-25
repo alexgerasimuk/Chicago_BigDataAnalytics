@@ -1,6 +1,11 @@
 {
 	"name": "RestServiceTraffic",
 	"properties": {
+		"parameters": {
+			"currentTime": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
