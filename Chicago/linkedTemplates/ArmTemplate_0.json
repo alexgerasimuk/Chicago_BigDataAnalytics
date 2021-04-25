@@ -537,7 +537,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"TargetFileName": {
-										"value": "traffic/@concat('traffic_', formatDateTime(dataset().WindowStartTime, 'MM-dd-yyyy_hh-mm-ss'))",
+										"value": "@traffic/concat('traffic_', formatDateTime(dataset().WindowStartTime, 'MM-dd-yyyy_hh-mm-ss'))",
 										"type": "Expression"
 									}
 								}
