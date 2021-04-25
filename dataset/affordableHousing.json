@@ -5,11 +5,20 @@
 			"referenceName": "AffordableHousingBlob",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"AFFileName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().AFFileName",
+					"type": "Expression"
+				},
 				"folderPath": "affordableHousing",
 				"container": "chicago"
 			}

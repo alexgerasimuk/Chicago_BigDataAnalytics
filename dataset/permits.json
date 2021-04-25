@@ -5,11 +5,20 @@
 			"referenceName": "PermitsBlob",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"PermitsFileName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().PermitsFileName",
+					"type": "Expression"
+				},
 				"folderPath": "permit",
 				"container": "chicago"
 			}

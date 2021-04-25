@@ -282,7 +282,10 @@
 				"outputs": [
 					{
 						"referenceName": "permits",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"PermitsFileName": "@concat('permits_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
+						}
 					}
 				]
 			},
@@ -362,7 +365,10 @@
 				"outputs": [
 					{
 						"referenceName": "affordableHousing",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"AFFileName": "@concat('affordableHousing_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
+						}
 					}
 				]
 			}
