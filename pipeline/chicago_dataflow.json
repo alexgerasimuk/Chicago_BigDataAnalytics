@@ -88,7 +88,13 @@
 				"outputs": [
 					{
 						"referenceName": "traffic",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"TargetFileName": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
