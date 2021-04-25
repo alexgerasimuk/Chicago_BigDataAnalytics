@@ -5,11 +5,20 @@
 			"referenceName": "CrimesBlob",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"CrimesFileName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().CrimesFileName",
+					"type": "Expression"
+				},
 				"folderPath": "crime",
 				"container": "chicago"
 			}

@@ -199,7 +199,10 @@
 				"outputs": [
 					{
 						"referenceName": "crimes",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"CrimesFileName": "@concat('crimes_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
+						}
 					}
 				]
 			},
