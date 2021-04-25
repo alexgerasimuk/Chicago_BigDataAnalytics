@@ -5,11 +5,17 @@
 			"referenceName": "TrafficBlob",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"TargetFileName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "@dataset().TargetFileName",
 				"folderPath": "traffic",
 				"container": "chicago"
 			}

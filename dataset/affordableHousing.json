@@ -14,6 +14,22 @@
 				"container": "chicago"
 			}
 		},
-		"schema": {}
+		"schema": {
+			"type": "object",
+			"properties": {
+				"community_area": {
+					"type": "string"
+				},
+				"community_area_number": {
+					"type": "string"
+				},
+				"property_type": {
+					"type": "string"
+				},
+				"units": {
+					"type": "string"
+				}
+			}
+		}
 	}
 }
