@@ -7,13 +7,17 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "Chicago"
 		},
+		"AffordableHousingBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AffordableHousingBlob'"
+		},
+		"AffordableHpusingBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AffordableHpusingBlob'"
+		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
-		},
-		"TrafficBlob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'TrafficBlob'"
 		},
 		"CrimesBlob_connectionString": {
 			"type": "secureString",
@@ -23,17 +27,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'PermitsBlob'"
 		},
-		"AffordableHpusingBlob_connectionString": {
+		"TrafficBlob_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AffordableHpusingBlob'"
+			"metadata": "Secure string for 'connectionString' of 'TrafficBlob'"
 		},
-		"AffordableHousingBlob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AffordableHousingBlob'"
-		},
-		"RestServiceTraffic_properties_typeProperties_url": {
+		"RestServiceAffordableHousing_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count"
+			"defaultValue": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$select=community_area,community_area_number,property_type,units"
 		},
 		"RestServiceCrimes_properties_typeProperties_url": {
 			"type": "string",
@@ -43,9 +43,9 @@
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/building-permits.json?$select=id,permit_type,issue_date,community_area"
 		},
-		"RestServiceAffordableHousing_properties_typeProperties_url": {
+		"RestServiceTraffic_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$select=community_area,community_area_number,property_type,units"
+			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count"
 		},
 		"containerUri": {
 			"type": "string",
@@ -74,11 +74,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AffordableHousingBlob_connectionString": {
+						"value": "[parameters('AffordableHousingBlob_connectionString')]"
+					},
+					"AffordableHpusingBlob_connectionString": {
+						"value": "[parameters('AffordableHpusingBlob_connectionString')]"
+					},
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
-					},
-					"TrafficBlob_connectionString": {
-						"value": "[parameters('TrafficBlob_connectionString')]"
 					},
 					"CrimesBlob_connectionString": {
 						"value": "[parameters('CrimesBlob_connectionString')]"
@@ -86,14 +89,11 @@
 					"PermitsBlob_connectionString": {
 						"value": "[parameters('PermitsBlob_connectionString')]"
 					},
-					"AffordableHpusingBlob_connectionString": {
-						"value": "[parameters('AffordableHpusingBlob_connectionString')]"
+					"TrafficBlob_connectionString": {
+						"value": "[parameters('TrafficBlob_connectionString')]"
 					},
-					"AffordableHousingBlob_connectionString": {
-						"value": "[parameters('AffordableHousingBlob_connectionString')]"
-					},
-					"RestServiceTraffic_properties_typeProperties_url": {
-						"value": "[parameters('RestServiceTraffic_properties_typeProperties_url')]"
+					"RestServiceAffordableHousing_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceAffordableHousing_properties_typeProperties_url')]"
 					},
 					"RestServiceCrimes_properties_typeProperties_url": {
 						"value": "[parameters('RestServiceCrimes_properties_typeProperties_url')]"
@@ -101,8 +101,8 @@
 					"RestServicePermit_properties_typeProperties_url": {
 						"value": "[parameters('RestServicePermit_properties_typeProperties_url')]"
 					},
-					"RestServiceAffordableHousing_properties_typeProperties_url": {
-						"value": "[parameters('RestServiceAffordableHousing_properties_typeProperties_url')]"
+					"RestServiceTraffic_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceTraffic_properties_typeProperties_url')]"
 					}
 				}
 			},
