@@ -15,8 +15,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "@dataset().TargetFileName",
-				"folderPath": "traffic",
+				"folderPath": "@dataset().TargetFileName",
 				"container": "chicago"
 			}
 		},
