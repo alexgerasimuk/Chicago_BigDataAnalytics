@@ -37,7 +37,7 @@
 		},
 		"RestServiceCrimes_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$select=id,date, year, community_area, primary_type, arrest, domestic"
+			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic"
 		},
 		"RestServicePermit_properties_typeProperties_url": {
 			"type": "string",
@@ -46,6 +46,10 @@
 		"RestServiceTraffic_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count"
+		},
+		"TrafficRestService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000"
 		}
 	},
 	"variables": {
@@ -167,6 +171,11 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"currentTime": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "RestService",
 				"typeProperties": {
@@ -186,6 +195,21 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('TrafficBlob_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TrafficRestService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('TrafficRestService_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
 				}
 			},
 			"dependsOn": []
@@ -251,7 +275,8 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "RestServiceTraffic",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {}
 				},
 				"annotations": [],
 				"type": "RestResource",

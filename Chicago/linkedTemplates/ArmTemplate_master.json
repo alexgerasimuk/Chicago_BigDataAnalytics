@@ -37,7 +37,7 @@
 		},
 		"RestServiceCrimes_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$select=id,date, year, community_area, primary_type, arrest, domestic"
+			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic"
 		},
 		"RestServicePermit_properties_typeProperties_url": {
 			"type": "string",
@@ -46,6 +46,10 @@
 		"RestServiceTraffic_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count"
+		},
+		"TrafficRestService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000"
 		},
 		"containerUri": {
 			"type": "string",
@@ -103,6 +107,9 @@
 					},
 					"RestServiceTraffic_properties_typeProperties_url": {
 						"value": "[parameters('RestServiceTraffic_properties_typeProperties_url')]"
+					},
+					"TrafficRestService_properties_typeProperties_url": {
+						"value": "[parameters('TrafficRestService_properties_typeProperties_url')]"
 					}
 				}
 			},
