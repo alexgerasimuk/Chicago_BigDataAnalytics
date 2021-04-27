@@ -3,12 +3,12 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "RestServiceTraffic",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"lastMonth": {
-					"value": "@getPastTime(1,'Month')",
-					"type": "Expression"
-				}
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"lastMonth": {
+				"type": "string",
+				"defaultValue": "@getPastTime(1,'Month')"
 			}
 		},
 		"annotations": [],
