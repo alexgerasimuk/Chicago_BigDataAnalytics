@@ -98,8 +98,7 @@
 						"inputs": [
 							{
 								"referenceName": "RestResourceTraffic",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -211,8 +210,7 @@
 						"inputs": [
 							{
 								"referenceName": "RestResourceCrimes",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -295,8 +293,7 @@
 						"inputs": [
 							{
 								"referenceName": "RestResourcePermit",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -379,8 +376,7 @@
 						"inputs": [
 							{
 								"referenceName": "RestResourceAffordableHousing",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [

@@ -258,7 +258,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "RestResourceTraffic",
+								"referenceName": "RestResourceCrimes",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -447,6 +447,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/RestResourceTraffic')]",
 				"[concat(variables('factoryId'), '/datasets/traffic')]",
+				"[concat(variables('factoryId'), '/datasets/RestResourceCrimes')]",
 				"[concat(variables('factoryId'), '/datasets/crimes')]",
 				"[concat(variables('factoryId'), '/datasets/RestResourcePermit')]",
 				"[concat(variables('factoryId'), '/datasets/permits')]",
