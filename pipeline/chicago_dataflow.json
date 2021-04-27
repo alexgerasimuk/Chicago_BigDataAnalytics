@@ -193,7 +193,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "RestResourceTraffic",
+						"referenceName": "RestResourceCrimes",
 						"type": "DatasetReference"
 					}
 				],
