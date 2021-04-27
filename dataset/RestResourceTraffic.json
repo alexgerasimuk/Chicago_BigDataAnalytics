@@ -3,7 +3,13 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "RestServiceTraffic",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"lastMonth": {
+					"value": "@subtractFromTime('2019-01-02T00:00:00Z', 1, 'Month')",
+					"type": "Expression"
+				}
+			}
 		},
 		"annotations": [],
 		"type": "RestResource",
