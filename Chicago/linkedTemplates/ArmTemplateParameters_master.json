@@ -23,17 +23,20 @@
 		"TrafficBlob_connectionString": {
 			"value": ""
 		},
+		"HttpServerTraffic_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth"
+		},
 		"RestServiceAffordableHousing_properties_typeProperties_url": {
-			"value": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$select=community_area,community_area_number,property_type,units"
+			"value": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=community_area,community_area_number,property_type,units"
 		},
 		"RestServiceCrimes_properties_typeProperties_url": {
-			"value": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic"
+			"value": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=60000&$where=date > '2021-01-01T00:00:00'"
 		},
 		"RestServicePermit_properties_typeProperties_url": {
-			"value": "https://data.cityofchicago.org/resource/building-permits.json?$select=id,permit_type,issue_date,community_area"
+			"value": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000&$where=issue_date > '2021-01-01T00:00:00'"
 		},
 		"RestServiceTraffic_properties_typeProperties_url": {
-			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth"
+			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=60000&$where=time > @linkedService().lastMonth"
 		},
 		"TrafficRestService_properties_typeProperties_url": {
 			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000"

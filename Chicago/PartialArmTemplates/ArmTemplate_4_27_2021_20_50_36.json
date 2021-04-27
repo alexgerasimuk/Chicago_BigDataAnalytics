@@ -6,54 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "Chicago"
-		},
-		"AffordableHousingBlob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AffordableHousingBlob'"
-		},
-		"AffordableHpusingBlob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AffordableHpusingBlob'"
-		},
-		"AzureBlobStorage1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
-		},
-		"CrimesBlob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'CrimesBlob'"
-		},
-		"PermitsBlob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'PermitsBlob'"
-		},
-		"TrafficBlob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'TrafficBlob'"
-		},
-		"HttpServerTraffic_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth"
-		},
-		"RestServiceAffordableHousing_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=community_area,community_area_number,property_type,units"
-		},
-		"RestServiceCrimes_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=60000&$where=date > '2021-01-01T00:00:00'"
-		},
-		"RestServicePermit_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000&$where=issue_date > '2021-01-01T00:00:00'"
-		},
-		"RestServiceTraffic_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=60000&$where=time > @linkedService().lastMonth"
-		},
-		"TrafficRestService_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000"
 		}
 	},
 	"variables": {
@@ -146,8 +98,7 @@
 						"inputs": [
 							{
 								"referenceName": "RestResourceTraffic",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -259,8 +210,7 @@
 						"inputs": [
 							{
 								"referenceName": "RestResourceTraffic",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -343,8 +293,7 @@
 						"inputs": [
 							{
 								"referenceName": "RestResourcePermit",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -427,8 +376,7 @@
 						"inputs": [
 							{
 								"referenceName": "RestResourceAffordableHousing",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
@@ -446,66 +394,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/RestResourceTraffic')]",
-				"[concat(variables('factoryId'), '/datasets/traffic')]",
-				"[concat(variables('factoryId'), '/datasets/crimes')]",
-				"[concat(variables('factoryId'), '/datasets/RestResourcePermit')]",
-				"[concat(variables('factoryId'), '/datasets/permits')]",
-				"[concat(variables('factoryId'), '/datasets/RestResourceAffordableHousing')]",
-				"[concat(variables('factoryId'), '/datasets/affordableHousing')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestResourceAffordableHousing')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServiceAffordableHousing",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/RestServiceAffordableHousing')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestResourceCrimes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServiceCrimes",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/RestServiceCrimes')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestResourcePermit')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServicePermit",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/RestServicePermit')]"
+				"[concat(variables('factoryId'), '/datasets/traffic')]"
 			]
 		},
 		{
@@ -532,162 +421,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/RestServiceTraffic')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/affordableHousing')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AffordableHousingBlob",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"AFFileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().AFFileName",
-							"type": "Expression"
-						},
-						"folderPath": "affordableHousing",
-						"container": "chicago"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"community_area": {
-							"type": "string"
-						},
-						"community_area_number": {
-							"type": "string"
-						},
-						"property_type": {
-							"type": "string"
-						},
-						"units": {
-							"type": "string"
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AffordableHousingBlob')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/crimes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CrimesBlob",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"CrimesFileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().CrimesFileName",
-							"type": "Expression"
-						},
-						"folderPath": "crime",
-						"container": "chicago"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"date": {
-							"type": "string"
-						},
-						"year": {
-							"type": "string"
-						},
-						"community_area": {
-							"type": "string"
-						},
-						"primary_type": {
-							"type": "string"
-						},
-						"arrest": {
-							"type": "boolean"
-						},
-						"domestic": {
-							"type": "boolean"
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CrimesBlob')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/permits')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "PermitsBlob",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"PermitsFileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().PermitsFileName",
-							"type": "Expression"
-						},
-						"folderPath": "permit",
-						"container": "chicago"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"permit_type": {
-							"type": "string"
-						},
-						"issue_date": {
-							"type": "string"
-						},
-						"community_area": {
-							"type": "string"
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/PermitsBlob')]"
 			]
 		},
 		{
@@ -741,60 +474,6 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/TrafficBlob')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AffordableHousingBlob')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AffordableHousingBlob_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AffordableHpusingBlob')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AffordableHpusingBlob_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CrimesBlob')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('CrimesBlob_connectionString')]"
-				}
-			},
 			"dependsOn": []
 		},
 		{
@@ -810,22 +489,9 @@
 				"annotations": [],
 				"type": "HttpServer",
 				"typeProperties": {
-					"url": "[parameters('HttpServerTraffic_properties_typeProperties_url')]",
+					"url": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PermitsBlob')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('PermitsBlob_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -838,7 +504,7 @@
 				"annotations": [],
 				"type": "RestService",
 				"typeProperties": {
-					"url": "[parameters('RestServiceAffordableHousing_properties_typeProperties_url')]",
+					"url": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=community_area,community_area_number,property_type,units",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
 				}
@@ -853,7 +519,7 @@
 				"annotations": [],
 				"type": "RestService",
 				"typeProperties": {
-					"url": "[parameters('RestServiceCrimes_properties_typeProperties_url')]",
+					"url": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=60000&$where=date > '2021-01-01T00:00:00'",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
 				}
@@ -868,7 +534,7 @@
 				"annotations": [],
 				"type": "RestService",
 				"typeProperties": {
-					"url": "[parameters('RestServicePermit_properties_typeProperties_url')]",
+					"url": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000&$where=issue_date > '2021-01-01T00:00:00'",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
 				}
@@ -888,35 +554,7 @@
 				"annotations": [],
 				"type": "RestService",
 				"typeProperties": {
-					"url": "[parameters('RestServiceTraffic_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TrafficBlob')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('TrafficBlob_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TrafficRestService')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "RestService",
-				"typeProperties": {
-					"url": "[parameters('TrafficRestService_properties_typeProperties_url')]",
+					"url": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=60000&$where=time > @linkedService().lastMonth",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
 				}
