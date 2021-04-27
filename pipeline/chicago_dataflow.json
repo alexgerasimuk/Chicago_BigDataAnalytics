@@ -54,18 +54,18 @@
 							},
 							{
 								"source": {
-									"path": "$['speed']"
-								},
-								"sink": {
-									"path": "speed"
-								}
-							},
-							{
-								"source": {
 									"path": "$['region']"
 								},
 								"sink": {
 									"path": "region"
+								}
+							},
+							{
+								"source": {
+									"path": "$['speed']"
+								},
+								"sink": {
+									"path": "speed"
 								}
 							},
 							{
@@ -158,18 +158,10 @@
 							},
 							{
 								"source": {
-									"path": "$['community_area']"
+									"path": "$['domestic']"
 								},
 								"sink": {
-									"path": "community_area"
-								}
-							},
-							{
-								"source": {
-									"path": "$['primary_type']"
-								},
-								"sink": {
-									"path": "primary_type"
+									"path": "domestic"
 								}
 							},
 							{
@@ -182,10 +174,18 @@
 							},
 							{
 								"source": {
-									"path": "$['domestic']"
+									"path": "$['community_area']"
 								},
 								"sink": {
-									"path": "domestic"
+									"path": "community_area"
+								}
+							},
+							{
+								"source": {
+									"path": "$['primary_type']"
+								},
+								"sink": {
+									"path": "primary_type"
 								}
 							}
 						]
@@ -352,6 +352,14 @@
 								},
 								"sink": {
 									"path": "units"
+								}
+							},
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"path": "id"
 								}
 							}
 						]
