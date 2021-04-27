@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=2000&$where=issue_date > '2021-01-01T00:00:00'",
+			"url": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000&$where=issue_date > '2021-01-01T00:00:00'",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
