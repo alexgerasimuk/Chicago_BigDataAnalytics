@@ -324,6 +324,14 @@
 						"mappings": [
 							{
 								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"path": "id"
+								}
+							},
+							{
+								"source": {
 									"path": "$['community_area']"
 								},
 								"sink": {
@@ -349,14 +357,9 @@
 							{
 								"source": {
 									"path": "$['units']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['id']"
 								},
 								"sink": {
-									"path": "id"
+									"path": "units"
 								}
 							}
 						]
