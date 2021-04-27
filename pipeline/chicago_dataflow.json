@@ -44,7 +44,7 @@
 								"referenceName": "loggingService",
 								"type": "LinkedServiceReference"
 							},
-							"path": "chicago/traffic/log"
+							"path": "chicago"
 						}
 					},
 					"translator": {
@@ -154,7 +154,7 @@
 								"referenceName": "loggingService",
 								"type": "LinkedServiceReference"
 							},
-							"path": "chicago/crime/log"
+							"path": "chicago"
 						}
 					},
 					"translator": {
@@ -280,7 +280,7 @@
 								"referenceName": "loggingService",
 								"type": "LinkedServiceReference"
 							},
-							"path": "chicago/permit/log"
+							"path": "chicago"
 						}
 					},
 					"translator": {
