@@ -84,7 +84,7 @@
 						"referenceName": "RestResourceTraffic",
 						"type": "DatasetReference",
 						"parameters": {
-							"lastMonth": "@subtractFromTime(pipeline().TriggerTime, 1, 'Month')"
+							"lastMonth": "@subtractFromTime('2019-01-02T00:00:00Z', 1, 'Month')"
 						}
 					}
 				],
