@@ -16,14 +16,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
 					},
 					"sink": {
 						"type": "JsonSink",
@@ -85,7 +81,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "HttpResourceTraffic",
+						"referenceName": "RestResourceTraffic",
 						"type": "DatasetReference"
 					}
 				],
