@@ -82,7 +82,10 @@
 				"inputs": [
 					{
 						"referenceName": "RestResourceTraffic",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"lastMonth": "@subtractFromTime(pipeline().TriggerTime, 1, 'Month')"
+						}
 					}
 				],
 				"outputs": [
@@ -93,7 +96,8 @@
 							"TargetFileName": {
 								"value": "@concat('traffic_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))",
 								"type": "Expression"
-							}
+							},
+							"lastMonth": "@getPastTime(1,'Month')"
 						}
 					}
 				]
