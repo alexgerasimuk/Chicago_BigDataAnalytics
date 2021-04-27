@@ -33,7 +33,7 @@
 			"value": "https://data.cityofchicago.org/resource/building-permits.json?$select=id,permit_type,issue_date,community_area"
 		},
 		"RestServiceTraffic_properties_typeProperties_url": {
-			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$select=time, region_id, speed, region, bus_count"
+			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time < @linkedService().currentTime"
 		},
 		"TrafficRestService_properties_typeProperties_url": {
 			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000"
