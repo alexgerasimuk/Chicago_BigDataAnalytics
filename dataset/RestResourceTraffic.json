@@ -3,7 +3,13 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "RestServiceTraffic",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"currentTime": {
+					"value": "@getPastTime(1,'Month')",
+					"type": "Expression"
+				}
+			}
 		},
 		"annotations": [],
 		"type": "RestResource",
