@@ -5,12 +5,6 @@
 			"referenceName": "RestServiceTraffic",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"lastMonth": {
-				"type": "string",
-				"defaultValue": "@subtractFromTime(pipeline().TriggerTime, 1, 'Month')"
-			}
-		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
