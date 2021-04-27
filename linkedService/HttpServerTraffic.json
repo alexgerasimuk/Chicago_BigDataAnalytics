@@ -3,8 +3,7 @@
 	"properties": {
 		"parameters": {
 			"lastMonth": {
-				"type": "string",
-				"defaultValue": "@subtractFromTime(pipeline().TriggerTime, 1, 'Month')"
+				"type": "string"
 			}
 		},
 		"annotations": [],
