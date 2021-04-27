@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic",
+			"url": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=60000&$where=date > '2021-01-01T00:00:00'",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
