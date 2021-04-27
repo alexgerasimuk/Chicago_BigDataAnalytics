@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference",
 			"parameters": {
 				"lastMonth": {
-					"value": "@convertFromUtc('2018-03-15T00:00:00Z')",
+					"value": "'2018-03-15T00:00:00'",
 					"type": "Expression"
 				}
 			}
