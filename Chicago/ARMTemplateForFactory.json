@@ -45,7 +45,7 @@
 		},
 		"RestServiceTraffic_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time < @linkedService().currentTime"
+			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth"
 		},
 		"TrafficRestService_properties_typeProperties_url": {
 			"type": "string",
@@ -512,7 +512,12 @@
 				"linkedServiceName": {
 					"referenceName": "RestServiceTraffic",
 					"type": "LinkedServiceReference",
-					"parameters": {}
+					"parameters": {
+						"lastMonth": {
+							"value": "@getPastTime(1,'Month')",
+							"type": "Expression"
+						}
+					}
 				},
 				"annotations": [],
 				"type": "RestResource",
@@ -849,7 +854,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"parameters": {
-					"currentTime": {
+					"lastMonth": {
 						"type": "string"
 					}
 				},
