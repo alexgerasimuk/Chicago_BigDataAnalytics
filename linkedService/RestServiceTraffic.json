@@ -1,6 +1,12 @@
 {
 	"name": "RestServiceTraffic",
 	"properties": {
+		"parameters": {
+			"lastMonth": {
+				"type": "string",
+				"defaultValue": "@subtractFromTime('2019-01-02T00:00:00Z', 1, 'Month')"
+			}
+		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
