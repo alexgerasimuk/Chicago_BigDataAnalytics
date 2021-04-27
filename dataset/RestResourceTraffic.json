@@ -8,7 +8,7 @@
 		"parameters": {
 			"lastMonth": {
 				"type": "string",
-				"defaultValue": "@getPastTime(1,'Month')"
+				"defaultValue": "@subtractFromTime(pipeline().TriggerTime, 1, 'Month')"
 			}
 		},
 		"annotations": [],
