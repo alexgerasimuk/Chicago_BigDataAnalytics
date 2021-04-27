@@ -33,6 +33,20 @@
 						}
 					},
 					"enableStaging": false,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "loggingService",
+								"type": "LinkedServiceReference"
+							},
+							"path": "chicago/traffic/log"
+						}
+					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
@@ -129,6 +143,20 @@
 						}
 					},
 					"enableStaging": false,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "loggingService",
+								"type": "LinkedServiceReference"
+							},
+							"path": "chicago/crime/log"
+						}
+					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
@@ -218,7 +246,12 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Destination",
+						"value": "chicago/permit/@{concat('permits_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))}"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "RestSource",
@@ -246,7 +279,8 @@
 							"linkedServiceName": {
 								"referenceName": "loggingService",
 								"type": "LinkedServiceReference"
-							}
+							},
+							"path": "chicago/permit/log"
 						}
 					},
 					"translator": {
