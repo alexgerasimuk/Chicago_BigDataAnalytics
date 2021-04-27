@@ -5,10 +5,7 @@
 			"referenceName": "RestServiceTraffic",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"currentTime": {
-					"value": "@getPastTime(1,'Month')",
-					"type": "Expression"
-				}
+				"lastMonth": "@getPastTime(1,'Month')"
 			}
 		},
 		"annotations": [],
