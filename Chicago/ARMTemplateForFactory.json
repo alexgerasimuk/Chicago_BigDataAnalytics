@@ -31,6 +31,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrafficBlob'"
 		},
+		"loggingService_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'loggingService'"
+		},
 		"HttpServerTraffic_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth"
@@ -54,6 +58,10 @@
 		"TrafficRestService_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000"
+		},
+		"loggingService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://csb10033fff9b4dbb74.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -97,6 +105,20 @@
 								}
 							},
 							"enableStaging": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Info",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "loggingService",
+										"type": "LinkedServiceReference"
+									},
+									"path": "chicago/traffic/log"
+								}
+							},
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [
@@ -194,6 +216,20 @@
 								}
 							},
 							"enableStaging": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Info",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "loggingService",
+										"type": "LinkedServiceReference"
+									},
+									"path": "chicago/crime/log"
+								}
+							},
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [
@@ -284,7 +320,12 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Destination",
+								"value": "chicago/permit/@{concat('permits_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))}"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "RestSource",
@@ -302,6 +343,20 @@
 								}
 							},
 							"enableStaging": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Info",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "loggingService",
+										"type": "LinkedServiceReference"
+									},
+									"path": "chicago/permit/log"
+								}
+							},
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [
@@ -460,7 +515,8 @@
 				"[concat(variables('factoryId'), '/datasets/RestResourcePermit')]",
 				"[concat(variables('factoryId'), '/datasets/permits')]",
 				"[concat(variables('factoryId'), '/datasets/RestResourceAffordableHousing')]",
-				"[concat(variables('factoryId'), '/datasets/affordableHousing')]"
+				"[concat(variables('factoryId'), '/datasets/affordableHousing')]",
+				"[concat(variables('factoryId'), '/linkedServices/loggingService')]"
 			]
 		},
 		{
@@ -928,6 +984,23 @@
 					"url": "[parameters('TrafficRestService_properties_typeProperties_url')]",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/loggingService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('loggingService_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('loggingService_accountKey')]"
+					}
 				}
 			},
 			"dependsOn": []

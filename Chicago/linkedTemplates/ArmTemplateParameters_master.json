@@ -23,6 +23,9 @@
 		"TrafficBlob_connectionString": {
 			"value": ""
 		},
+		"loggingService_accountKey": {
+			"value": ""
+		},
 		"HttpServerTraffic_properties_typeProperties_url": {
 			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth"
 		},
@@ -40,6 +43,9 @@
 		},
 		"TrafficRestService_properties_typeProperties_url": {
 			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000"
+		},
+		"loggingService_properties_typeProperties_url": {
+			"value": "https://csb10033fff9b4dbb74.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"value": ""

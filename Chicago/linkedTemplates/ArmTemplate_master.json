@@ -31,6 +31,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrafficBlob'"
 		},
+		"loggingService_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'loggingService'"
+		},
 		"HttpServerTraffic_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth"
@@ -54,6 +58,10 @@
 		"TrafficRestService_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000"
+		},
+		"loggingService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://csb10033fff9b4dbb74.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -100,6 +108,9 @@
 					"TrafficBlob_connectionString": {
 						"value": "[parameters('TrafficBlob_connectionString')]"
 					},
+					"loggingService_accountKey": {
+						"value": "[parameters('loggingService_accountKey')]"
+					},
 					"HttpServerTraffic_properties_typeProperties_url": {
 						"value": "[parameters('HttpServerTraffic_properties_typeProperties_url')]"
 					},
@@ -117,6 +128,9 @@
 					},
 					"TrafficRestService_properties_typeProperties_url": {
 						"value": "[parameters('TrafficRestService_properties_typeProperties_url')]"
+					},
+					"loggingService_properties_typeProperties_url": {
+						"value": "[parameters('loggingService_properties_typeProperties_url')]"
 					}
 				}
 			},
