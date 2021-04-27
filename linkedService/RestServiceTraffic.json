@@ -1,11 +1,6 @@
 {
 	"name": "RestServiceTraffic",
 	"properties": {
-		"parameters": {
-			"lastMonth": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
