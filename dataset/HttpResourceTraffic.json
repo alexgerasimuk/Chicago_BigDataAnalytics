@@ -1,0 +1,20 @@
+{
+	"name": "HttpResourceTraffic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServerTraffic",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"lastMonth": "@subtractFromTime('2019-05-02T00:00:00Z', 1, 'Month')"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	}
+}

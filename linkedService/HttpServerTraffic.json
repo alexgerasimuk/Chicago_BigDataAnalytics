@@ -4,7 +4,7 @@
 		"parameters": {
 			"lastMonth": {
 				"type": "string",
-				"defaultValue": "@subtractFromTime('2019-05-02T00:00:00Z', 1, 'Month')"
+				"defaultValue": "@subtractFromTime(pipeline().TriggerTime, 1, 'Month')"
 			}
 		},
 		"annotations": [],
