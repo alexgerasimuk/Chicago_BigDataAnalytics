@@ -512,12 +512,7 @@
 				"linkedServiceName": {
 					"referenceName": "RestServiceTraffic",
 					"type": "LinkedServiceReference",
-					"parameters": {
-						"lastMonth": {
-							"value": "@getPastTime(1,'Month')",
-							"type": "Expression"
-						}
-					}
+					"parameters": {}
 				},
 				"annotations": [],
 				"type": "RestResource",
@@ -855,7 +850,8 @@
 			"properties": {
 				"parameters": {
 					"lastMonth": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "@subtractFromTime(pipeline().TriggerTime, 1, 'Month')"
 					}
 				},
 				"annotations": [],
