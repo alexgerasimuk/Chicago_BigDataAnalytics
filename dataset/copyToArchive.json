@@ -1,0 +1,19 @@
+{
+	"name": "copyToArchive",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "copyToArchive",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "traffic/archive",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}
