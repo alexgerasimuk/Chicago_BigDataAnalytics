@@ -383,7 +383,8 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
-										"wildcardFolderPath": "traffic/latest",
+										"wildcardFolderPath": "traffic",
+										"wildcardFileName": "latest",
 										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
