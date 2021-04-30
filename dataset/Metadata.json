@@ -1,0 +1,17 @@
+{
+	"name": "Metadata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Metadata",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation"
+			}
+		},
+		"schema": {}
+	}
+}
