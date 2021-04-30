@@ -1,0 +1,19 @@
+{
+	"name": "AllTraffics",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TrafficsMetadata",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "traffic",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}

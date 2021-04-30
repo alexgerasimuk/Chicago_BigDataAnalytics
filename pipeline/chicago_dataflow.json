@@ -442,19 +442,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "traffic",
-						"type": "DatasetReference",
-						"parameters": {
-							"TargetFileName": "@concat('traffic_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))",
-							"lastMonth": "@getPastTime(1,'Month')"
-						}
+						"referenceName": "AllTraffics",
+						"type": "DatasetReference"
 					},
-					"fieldList": [
-						"lastModified"
-					],
+					"fieldList": [],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
