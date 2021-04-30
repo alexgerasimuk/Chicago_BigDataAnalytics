@@ -383,6 +383,7 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
+										"wildcardFolderPath": "traffic/latest",
 										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
@@ -434,7 +435,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "traffic",
+									"referenceName": "Latest",
 									"type": "DatasetReference"
 								},
 								"enableLogging": false,
