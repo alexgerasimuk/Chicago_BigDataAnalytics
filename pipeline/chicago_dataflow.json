@@ -443,7 +443,11 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "traffic",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"TargetFileName": "@concat('traffic_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))",
+							"lastMonth": "@getPastTime(1,'Month')"
+						}
 					},
 					"fieldList": [
 						"lastModified"
@@ -457,21 +461,6 @@
 						"type": "JsonReadSettings"
 					}
 				}
-			},
-			{
-				"name": "Switch1",
-				"type": "Switch",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"cases": []
-				}
-			},
-			{
-				"name": "If Condition1",
-				"type": "IfCondition",
-				"dependsOn": [],
-				"userProperties": []
 			}
 		],
 		"annotations": []
