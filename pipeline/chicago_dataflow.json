@@ -429,7 +429,7 @@
 				]
 			},
 			{
-				"name": "Get Metadata1",
+				"name": "Get Traffic",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -442,12 +442,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Metadata",
+						"referenceName": "traffic",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"lastModified"
+					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
