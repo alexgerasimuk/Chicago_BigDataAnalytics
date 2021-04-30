@@ -402,7 +402,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "traffic",
+									"referenceName": "Latest",
 									"type": "DatasetReference"
 								}
 							],

@@ -1,0 +1,19 @@
+{
+	"name": "Latest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "copyToArchive",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "traffic/latest",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}
