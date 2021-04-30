@@ -3,117 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy traffic",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "RestSource",
-						"httpRequestTimeout": "00:01:40",
-						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET"
-					},
-					"sink": {
-						"type": "JsonSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"blockSizeInMB": 100
-						},
-						"formatSettings": {
-							"type": "JsonWriteSettings",
-							"filePattern": "arrayOfObjects"
-						}
-					},
-					"enableStaging": false,
-					"logSettings": {
-						"enableCopyActivityLog": true,
-						"copyActivityLogSettings": {
-							"logLevel": "Info",
-							"enableReliableLogging": false
-						},
-						"logLocationSettings": {
-							"linkedServiceName": {
-								"referenceName": "loggingService",
-								"type": "LinkedServiceReference"
-							},
-							"path": "chicago"
-						}
-					},
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['time']"
-								},
-								"sink": {
-									"path": "time"
-								}
-							},
-							{
-								"source": {
-									"path": "$['region_id']"
-								},
-								"sink": {
-									"path": "region_id"
-								}
-							},
-							{
-								"source": {
-									"path": "$['region']"
-								},
-								"sink": {
-									"path": "region"
-								}
-							},
-							{
-								"source": {
-									"path": "$['speed']"
-								},
-								"sink": {
-									"path": "speed"
-								}
-							},
-							{
-								"source": {
-									"path": "$['bus_count']"
-								},
-								"sink": {
-									"path": "bus_count"
-								}
-							}
-						]
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "RestResourceTraffic",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "traffic",
-						"type": "DatasetReference",
-						"parameters": {
-							"TargetFileName": {
-								"value": "@concat('traffic_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))",
-								"type": "Expression"
-							},
-							"lastMonth": "@getPastTime(1,'Month')"
-						}
-					}
-				]
-			},
-			{
 				"name": "Copy crimes",
 				"type": "Copy",
 				"dependsOn": [],
@@ -446,7 +335,7 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"lastModified"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
@@ -456,6 +345,251 @@
 					"formatSettings": {
 						"type": "JsonReadSettings"
 					}
+				}
+			},
+			{
+				"name": "If latest is empty",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Get Traffic",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@empty(activity('Get Traffic').output.childItems)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Copy traffic_copy1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings",
+										"blockSizeInMB": 100
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings",
+										"filePattern": "arrayOfObjects"
+									}
+								},
+								"enableStaging": false,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Info",
+										"enableReliableLogging": false
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "loggingService",
+											"type": "LinkedServiceReference"
+										},
+										"path": "chicago"
+									}
+								},
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['time']"
+											},
+											"sink": {
+												"path": "time"
+											}
+										},
+										{
+											"source": {
+												"path": "$['region_id']"
+											},
+											"sink": {
+												"path": "region_id"
+											}
+										},
+										{
+											"source": {
+												"path": "$['region']"
+											},
+											"sink": {
+												"path": "region"
+											}
+										},
+										{
+											"source": {
+												"path": "$['speed']"
+											},
+											"sink": {
+												"path": "speed"
+											}
+										},
+										{
+											"source": {
+												"path": "$['bus_count']"
+											},
+											"sink": {
+												"path": "bus_count"
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "RestResourceTraffic",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "traffic",
+									"type": "DatasetReference",
+									"parameters": {
+										"TargetFileName": {
+											"value": "@formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss')",
+											"type": "Expression"
+										},
+										"lastMonth": "@getPastTime(1,'Month')"
+									}
+								}
+							]
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Copy traffic",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings",
+										"blockSizeInMB": 100
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings",
+										"filePattern": "arrayOfObjects"
+									}
+								},
+								"enableStaging": false,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Info",
+										"enableReliableLogging": false
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "loggingService",
+											"type": "LinkedServiceReference"
+										},
+										"path": "chicago"
+									}
+								},
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['time']"
+											},
+											"sink": {
+												"path": "time"
+											}
+										},
+										{
+											"source": {
+												"path": "$['region_id']"
+											},
+											"sink": {
+												"path": "region_id"
+											}
+										},
+										{
+											"source": {
+												"path": "$['region']"
+											},
+											"sink": {
+												"path": "region"
+											}
+										},
+										{
+											"source": {
+												"path": "$['speed']"
+											},
+											"sink": {
+												"path": "speed"
+											}
+										},
+										{
+											"source": {
+												"path": "$['bus_count']"
+											},
+											"sink": {
+												"path": "bus_count"
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "RestResourceTraffic",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "traffic",
+									"type": "DatasetReference",
+									"parameters": {
+										"TargetFileName": {
+											"value": "@concat(formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+											"type": "Expression"
+										},
+										"lastMonth": "@getPastTime(1,'Month')"
+									}
+								}
+							]
+						}
+					]
 				}
 			}
 		],
