@@ -22,7 +22,7 @@
 					"value": "@dataset().TargetFileName",
 					"type": "Expression"
 				},
-				"folderPath": "traffic",
+				"folderPath": "traffic/latest",
 				"container": "chicago"
 			}
 		},
