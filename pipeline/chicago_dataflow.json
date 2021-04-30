@@ -383,8 +383,8 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
-										"wildcardFolderPath": "traffic",
-										"wildcardFileName": "latest",
+										"wildcardFolderPath": "traffic/latest",
+										"wildcardFileName": "*",
 										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
@@ -560,7 +560,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"TargetFileName": {
-								"value": "@concat(formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+								"value": "@concat(formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'),'_')",
 								"type": "Expression"
 							},
 							"lastMonth": "@getPastTime(1,'Month')"
