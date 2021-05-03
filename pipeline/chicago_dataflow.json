@@ -648,7 +648,7 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
-										"wildcardFolderPath": "traffic/latest",
+										"wildcardFolderPath": "crime/latest",
 										"wildcardFileName": "*",
 										"enablePartitionDiscovery": false
 									},
