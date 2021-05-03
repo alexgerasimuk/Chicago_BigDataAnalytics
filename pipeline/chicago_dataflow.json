@@ -975,6 +975,106 @@
 								}
 							}
 						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Copy permit all",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings",
+										"blockSizeInMB": 100
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings",
+										"filePattern": "arrayOfObjects"
+									}
+								},
+								"enableStaging": false,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Info",
+										"enableReliableLogging": false
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "loggingService",
+											"type": "LinkedServiceReference"
+										},
+										"path": "chicago"
+									}
+								},
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['time']"
+											},
+											"sink": {
+												"path": "time"
+											}
+										},
+										{
+											"source": {
+												"path": "$['region_id']"
+											},
+											"sink": {
+												"path": "region_id"
+											}
+										},
+										{
+											"source": {
+												"path": "$['region']"
+											},
+											"sink": {
+												"path": "region"
+											}
+										},
+										{
+											"source": {
+												"path": "$['speed']"
+											},
+											"sink": {
+												"path": "speed"
+											}
+										},
+										{
+											"source": {
+												"path": "$['bus_count']"
+											},
+											"sink": {
+												"path": "bus_count"
+											}
+										}
+									]
+								}
+							},
+							"outputs": [
+								{
+									"referenceName": "permits",
+									"type": "DatasetReference",
+									"parameters": {
+										"PermitsFileName": {
+											"value": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
 					]
 				}
 			},
