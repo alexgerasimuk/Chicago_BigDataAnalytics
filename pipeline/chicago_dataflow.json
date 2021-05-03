@@ -432,7 +432,10 @@
 							"inputs": [
 								{
 									"referenceName": "LatestTraffic",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": "@item.name"
+									}
 								}
 							],
 							"outputs": [
@@ -464,7 +467,10 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "LatestTraffic",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": "@item.name"
+									}
 								},
 								"enableLogging": false,
 								"storeSettings": {
