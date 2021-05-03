@@ -14,7 +14,7 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "dataset().lastMonthSub"
+			"relativeUrl": "kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000&$where=time > dataset().lastMonthSub"
 		},
 		"schema": []
 	}
