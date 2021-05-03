@@ -465,7 +465,7 @@
 				}
 			},
 			{
-				"name": "Copy traffic_copy1",
+				"name": "Copy traffic",
 				"type": "Copy",
 				"dependsOn": [
 					{
