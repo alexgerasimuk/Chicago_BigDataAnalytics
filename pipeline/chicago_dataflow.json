@@ -617,7 +617,7 @@
 											"type": "Expression"
 										},
 										"lastMonth": {
-											"value": "@substring(concat(activity('Get Metadata Lattest Traffic').output.childItems)),8,19)",
+											"value": "@substring(concat(activity('GetLattestTraffic').output.childItems)),8,19)",
 											"type": "Expression"
 										}
 									}
