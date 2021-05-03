@@ -1,0 +1,15 @@
+{
+	"name": "RestServiceTrafficAll",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Basic",
+			"userName": "235010@student.pwr.edu.pl",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkNISUNBR09fM2U1YjgzMDgtNzEzOS00YzNmLTgyN2MtNDdlZDEzODNkZjQzIg0KfQ=="
+		}
+	}
+}
