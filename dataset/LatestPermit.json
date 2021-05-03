@@ -1,0 +1,19 @@
+{
+	"name": "LatestPermit",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "copyToArchive",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "permit/latest",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}
