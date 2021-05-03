@@ -1,0 +1,19 @@
+{
+	"name": "ArchivePermit",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CopyToArchivePermit",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "permit/archive",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "ArchiveCrime",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "copyToArchiveCrime",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "crime/archive",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}
