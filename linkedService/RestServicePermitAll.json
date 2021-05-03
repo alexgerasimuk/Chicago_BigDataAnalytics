@@ -1,0 +1,15 @@
+{
+	"name": "RestServicePermitAll",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000&$where=issue_date > '2021-01-01T00:00:00'",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Basic",
+			"userName": "235010@student.pwr.edu.pl",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkNISUNBR09fMjRiMWQ0NzYtYzUxZi00N2QxLWJmZjAtODk4NzU4MjQ3ZDJmIg0KfQ=="
+		}
+	}
+}
