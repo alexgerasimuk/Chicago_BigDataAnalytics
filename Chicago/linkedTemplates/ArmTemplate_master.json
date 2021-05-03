@@ -19,9 +19,25 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureSqlDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase'"
+		},
+		"CopyToArchivePermit_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CopyToArchivePermit'"
+		},
 		"CrimesBlob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CrimesBlob'"
+		},
+		"Latest_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Latest'"
+		},
+		"Metadata_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Metadata'"
 		},
 		"PermitsBlob_connectionString": {
 			"type": "secureString",
@@ -31,9 +47,29 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrafficBlob'"
 		},
+		"TrafficsMetadata_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TrafficsMetadata'"
+		},
+		"copyToArchive_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'copyToArchive'"
+		},
+		"copyToArchiveCrime_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'copyToArchiveCrime'"
+		},
+		"copyToArchiveTraffic_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'copyToArchiveTraffic'"
+		},
 		"loggingService_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'loggingService'"
+		},
+		"RestServiceTrafficAll_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'RestServiceTrafficAll'"
 		},
 		"HttpServerTraffic_properties_typeProperties_url": {
 			"type": "string",
@@ -53,7 +89,7 @@
 		},
 		"RestServiceTraffic_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=60000&$where=time > @linkedService().lastMonth"
+			"defaultValue": "https://data.cityofchicago.org/resource/"
 		},
 		"TrafficRestService_properties_typeProperties_url": {
 			"type": "string",
@@ -62,6 +98,14 @@
 		"loggingService_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://csb10033fff9b4dbb74.dfs.core.windows.net"
+		},
+		"RestServiceTrafficAll_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=600000000000"
+		},
+		"RestServiceTrafficAll_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "235010@student.pwr.edu.pl"
 		},
 		"containerUri": {
 			"type": "string",
@@ -99,8 +143,20 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
+					"AzureSqlDatabase_connectionString": {
+						"value": "[parameters('AzureSqlDatabase_connectionString')]"
+					},
+					"CopyToArchivePermit_connectionString": {
+						"value": "[parameters('CopyToArchivePermit_connectionString')]"
+					},
 					"CrimesBlob_connectionString": {
 						"value": "[parameters('CrimesBlob_connectionString')]"
+					},
+					"Latest_connectionString": {
+						"value": "[parameters('Latest_connectionString')]"
+					},
+					"Metadata_connectionString": {
+						"value": "[parameters('Metadata_connectionString')]"
 					},
 					"PermitsBlob_connectionString": {
 						"value": "[parameters('PermitsBlob_connectionString')]"
@@ -108,8 +164,17 @@
 					"TrafficBlob_connectionString": {
 						"value": "[parameters('TrafficBlob_connectionString')]"
 					},
-					"loggingService_accountKey": {
-						"value": "[parameters('loggingService_accountKey')]"
+					"TrafficsMetadata_connectionString": {
+						"value": "[parameters('TrafficsMetadata_connectionString')]"
+					},
+					"copyToArchive_connectionString": {
+						"value": "[parameters('copyToArchive_connectionString')]"
+					},
+					"copyToArchiveCrime_connectionString": {
+						"value": "[parameters('copyToArchiveCrime_connectionString')]"
+					},
+					"copyToArchiveTraffic_connectionString": {
+						"value": "[parameters('copyToArchiveTraffic_connectionString')]"
 					},
 					"HttpServerTraffic_properties_typeProperties_url": {
 						"value": "[parameters('HttpServerTraffic_properties_typeProperties_url')]"
@@ -128,9 +193,6 @@
 					},
 					"TrafficRestService_properties_typeProperties_url": {
 						"value": "[parameters('TrafficRestService_properties_typeProperties_url')]"
-					},
-					"loggingService_properties_typeProperties_url": {
-						"value": "[parameters('loggingService_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -149,11 +211,46 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"loggingService_accountKey": {
+						"value": "[parameters('loggingService_accountKey')]"
+					},
+					"RestServiceTrafficAll_password": {
+						"value": "[parameters('RestServiceTrafficAll_password')]"
+					},
+					"loggingService_properties_typeProperties_url": {
+						"value": "[parameters('loggingService_properties_typeProperties_url')]"
+					},
+					"RestServiceTrafficAll_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceTrafficAll_properties_typeProperties_url')]"
+					},
+					"RestServiceTrafficAll_properties_typeProperties_userName": {
+						"value": "[parameters('RestServiceTrafficAll_properties_typeProperties_userName')]"
 					}
 				}
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'Chicago_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "Chicago_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Chicago_ArmTemplate_1')]"
 			]
 		}
 	]

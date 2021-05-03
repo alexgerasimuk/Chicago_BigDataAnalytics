@@ -6,12 +6,513 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "Chicago"
+		},
+		"loggingService_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'loggingService'"
+		},
+		"RestServiceTrafficAll_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'RestServiceTrafficAll'"
+		},
+		"loggingService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://csb10033fff9b4dbb74.dfs.core.windows.net"
+		},
+		"RestServiceTrafficAll_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=600000000000"
+		},
+		"RestServiceTrafficAll_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "235010@student.pwr.edu.pl"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/loggingService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('loggingService_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('loggingService_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestServiceTrafficAll')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('RestServiceTrafficAll_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('RestServiceTrafficAll_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('RestServiceTrafficAll_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AllCrimes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "TrafficsMetadata",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "crime",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AllPermits')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "TrafficsMetadata",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "permit",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AllTraffics')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "TrafficsMetadata",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "traffic",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ArchiveCrime')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "copyToArchiveCrime",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "crime/archive",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ArchivePermit')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CopyToArchivePermit",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "permit/archive",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ArchiveTraffic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "copyToArchiveTraffic",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "traffic/archive",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LatestCrimes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "copyToArchive",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "crime/latest",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LatestPermit')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "copyToArchive",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "permit/latest",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LatestTraffic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "copyToArchive",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "traffic/latest",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Metadata')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Metadata",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "metadata",
+						"container": "chicago"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResourceAffordableHousing')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceAffordableHousing",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResourceCrimes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceCrimes",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResourcePermit')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServicePermit",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResourceTraffic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceTraffic",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"lastMonthSub": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@concat('kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000&$where=time > ', '\"', substring(dataset().lastMonthSub,9,10), '\"' )",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/affordableHousing')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AffordableHousingBlob",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"AFFileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().AFFileName",
+							"type": "Expression"
+						},
+						"folderPath": "affordableHousing",
+						"container": "chicago"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"community_area": {
+							"type": "string"
+						},
+						"community_area_number": {
+							"type": "string"
+						},
+						"property_type": {
+							"type": "string"
+						},
+						"units": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/crimes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CrimesBlob",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"CrimesFileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().CrimesFileName",
+							"type": "Expression"
+						},
+						"folderPath": "crime/latest",
+						"container": "chicago"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"date": {
+							"type": "string"
+						},
+						"year": {
+							"type": "string"
+						},
+						"community_area": {
+							"type": "string"
+						},
+						"primary_type": {
+							"type": "string"
+						},
+						"arrest": {
+							"type": "boolean"
+						},
+						"domestic": {
+							"type": "boolean"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/permits')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "PermitsBlob",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"PermitsFileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().PermitsFileName",
+							"type": "Expression"
+						},
+						"folderPath": "permit/latest",
+						"container": "chicago"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"permit_type": {
+							"type": "string"
+						},
+						"issue_date": {
+							"type": "string"
+						},
+						"community_area": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/traffic')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -24,9 +525,6 @@
 				"parameters": {
 					"TargetFileName": {
 						"type": "string"
-					},
-					"lastMonth": {
-						"type": "string"
 					}
 				},
 				"annotations": [],
@@ -38,7 +536,7 @@
 							"value": "@dataset().TargetFileName",
 							"type": "Expression"
 						},
-						"folderPath": "traffic",
+						"folderPath": "traffic/latest",
 						"container": "chicago"
 					}
 				},
@@ -64,449 +562,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/chicago_dataflow')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy traffic",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "RestSource",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": "00.00:00:00.010",
-								"requestMethod": "GET"
-							},
-							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings",
-									"blockSizeInMB": 100
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings",
-									"filePattern": "arrayOfObjects"
-								}
-							},
-							"enableStaging": false,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Info",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "loggingService",
-										"type": "LinkedServiceReference"
-									},
-									"path": "chicago"
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['time']"
-										},
-										"sink": {
-											"path": "time"
-										}
-									},
-									{
-										"source": {
-											"path": "$['region_id']"
-										},
-										"sink": {
-											"path": "region_id"
-										}
-									},
-									{
-										"source": {
-											"path": "$['region']"
-										},
-										"sink": {
-											"path": "region"
-										}
-									},
-									{
-										"source": {
-											"path": "$['speed']"
-										},
-										"sink": {
-											"path": "speed"
-										}
-									},
-									{
-										"source": {
-											"path": "$['bus_count']"
-										},
-										"sink": {
-											"path": "bus_count"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "RestResourceTraffic",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "traffic",
-								"type": "DatasetReference",
-								"parameters": {
-									"TargetFileName": {
-										"value": "@concat('traffic_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))",
-										"type": "Expression"
-									},
-									"lastMonth": "@getPastTime(1,'Month')"
-								}
-							}
-						]
-					},
-					{
-						"name": "Copy crimes",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "RestSource",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": "00.00:00:00.010",
-								"requestMethod": "GET"
-							},
-							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings",
-									"filePattern": "arrayOfObjects"
-								}
-							},
-							"enableStaging": false,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Info",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "loggingService",
-										"type": "LinkedServiceReference"
-									},
-									"path": "chicago"
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['id']"
-										},
-										"sink": {
-											"path": "id"
-										}
-									},
-									{
-										"source": {
-											"path": "$['date']"
-										},
-										"sink": {
-											"path": "date"
-										}
-									},
-									{
-										"source": {
-											"path": "$['year']"
-										},
-										"sink": {
-											"path": "year"
-										}
-									},
-									{
-										"source": {
-											"path": "$['domestic']"
-										},
-										"sink": {
-											"path": "domestic"
-										}
-									},
-									{
-										"source": {
-											"path": "$['arrest']"
-										},
-										"sink": {
-											"path": "arrest"
-										}
-									},
-									{
-										"source": {
-											"path": "$['community_area']"
-										},
-										"sink": {
-											"path": "community_area"
-										}
-									},
-									{
-										"source": {
-											"path": "$['primary_type']"
-										},
-										"sink": {
-											"path": "primary_type"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "RestResourceCrimes",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "crimes",
-								"type": "DatasetReference",
-								"parameters": {
-									"CrimesFileName": "@concat('crimes_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
-								}
-							}
-						]
-					},
-					{
-						"name": "Copy permits",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Destination",
-								"value": "chicago/permit/@{concat('permits_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))}"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "RestSource",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": "00.00:00:00.010",
-								"requestMethod": "GET"
-							},
-							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Info",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "loggingService",
-										"type": "LinkedServiceReference"
-									},
-									"path": "chicago"
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['id']"
-										},
-										"sink": {
-											"path": "id"
-										}
-									},
-									{
-										"source": {
-											"path": "$['permit_type']"
-										},
-										"sink": {
-											"path": "permit_type"
-										}
-									},
-									{
-										"source": {
-											"path": "$['issue_date']"
-										},
-										"sink": {
-											"path": "issue_date"
-										}
-									},
-									{
-										"source": {
-											"path": "$['community_area']"
-										},
-										"sink": {
-											"path": "community_area"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "RestResourcePermit",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "permits",
-								"type": "DatasetReference",
-								"parameters": {
-									"PermitsFileName": "@concat('permits_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
-								}
-							}
-						]
-					},
-					{
-						"name": "Copy affordable housing",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "RestSource",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": "00.00:00:00.010",
-								"requestMethod": "GET"
-							},
-							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['id']"
-										},
-										"sink": {
-											"path": "id"
-										}
-									},
-									{
-										"source": {
-											"path": "$['community_area']"
-										},
-										"sink": {
-											"path": "community_area"
-										}
-									},
-									{
-										"source": {
-											"path": "$['community_area_number']"
-										},
-										"sink": {
-											"path": "community_area_number"
-										}
-									},
-									{
-										"source": {
-											"path": "$['property_type']"
-										},
-										"sink": {
-											"path": "property_type"
-										}
-									},
-									{
-										"source": {
-											"path": "$['units']"
-										},
-										"sink": {
-											"path": "units"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "RestResourceAffordableHousing",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "affordableHousing",
-								"type": "DatasetReference",
-								"parameters": {
-									"AFFileName": "@concat('affordableHousing_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
-								}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/traffic')]"
-			]
 		}
 	]
 }
