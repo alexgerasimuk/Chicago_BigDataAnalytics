@@ -14,7 +14,7 @@
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat('kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000&$where=time > ', substring(dataset().lastMonthSub,11,12))",
+				"value": "@concat('kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000&$where=time > ', substring(dataset().lastMonthSub,11,10))",
 				"type": "Expression"
 			}
 		},
