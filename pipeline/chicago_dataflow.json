@@ -390,7 +390,7 @@
 							"type": "Copy",
 							"dependsOn": [
 								{
-									"activity": "Get Metadata Lattest Traffic",
+									"activity": "GetLattestTraffic",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -475,7 +475,7 @@
 							}
 						},
 						{
-							"name": "Get Metadata Lattest Traffic",
+							"name": "GetLattestTraffic",
 							"type": "GetMetadata",
 							"dependsOn": [],
 							"policy": {
