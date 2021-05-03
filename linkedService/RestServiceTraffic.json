@@ -2,8 +2,9 @@
 	"name": "RestServiceTraffic",
 	"properties": {
 		"parameters": {
-			"lastMonth": {
-				"type": "string"
+			"lastMonthSub": {
+				"type": "string",
+				"defaultValue": "lastMonth"
 			}
 		},
 		"annotations": [],
