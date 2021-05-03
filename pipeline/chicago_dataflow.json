@@ -126,7 +126,10 @@
 						"referenceName": "crimes",
 						"type": "DatasetReference",
 						"parameters": {
-							"CrimesFileName": "@concat('crimes_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
+							"CrimesFileName": {
+								"value": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+								"type": "Expression"
+							}
 						}
 					}
 				]
@@ -235,7 +238,10 @@
 						"referenceName": "permits",
 						"type": "DatasetReference",
 						"parameters": {
-							"PermitsFileName": "@concat('permits_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
+							"PermitsFileName": {
+								"value": "@concat('permits_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+								"type": "Expression"
+							}
 						}
 					}
 				]
@@ -574,7 +580,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"TargetFileName": {
-								"value": "@concat(formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'),'_')",
+								"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
 								"type": "Expression"
 							},
 							"lastMonth": "@getPastTime(1,'Month')"
