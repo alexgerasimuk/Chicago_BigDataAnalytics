@@ -375,7 +375,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@not(contains(activity('Get Traffic').output.childItems, 'latest'))",
+						"value": "@contains(activity('Get Traffic').output.childItems, 'latest')",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -626,7 +626,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@not(contains(activity('Get Crimes').output.childItems, 'latest'))",
+						"value": "@contains(activity('Get Crimes').output.childItems, 'latest')",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -729,7 +729,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@not(contains(activity('Get Permits').output.childItems, 'latest'))",
+						"value": "@contains(activity('Get Permits').output.childItems, 'latest')",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
