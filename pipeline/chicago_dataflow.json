@@ -489,7 +489,10 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "LatestTraffic",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": "@item.name"
+									}
 								},
 								"fieldList": [
 									"childItems"
