@@ -2,7 +2,7 @@
 	"name": "RestResourceCrime",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "RestServiceCrime",
+			"referenceName": "RestServiceCrimeAll",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
