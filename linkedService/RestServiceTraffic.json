@@ -4,7 +4,7 @@
 		"parameters": {
 			"lastMonthSub": {
 				"type": "string",
-				"defaultValue": "lastMonth"
+				"defaultValue": "@substring(concat(activity('GetLattestTraffic').output.childItems),8,19)"
 			}
 		},
 		"annotations": [],
