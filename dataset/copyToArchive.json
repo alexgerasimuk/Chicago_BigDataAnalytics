@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "traffic/archive",
+				"folderPath": "crime/latest",
 				"container": "chicago"
 			}
 		},
