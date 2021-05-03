@@ -676,7 +676,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "LatestTraffic",
+									"referenceName": "LatestCrimes",
 									"type": "DatasetReference"
 								},
 								"enableLogging": false,
