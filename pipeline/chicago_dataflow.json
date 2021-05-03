@@ -605,7 +605,13 @@
 							"inputs": [
 								{
 									"referenceName": "RestResourceTraffic",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"lastMonth": {
+											"value": "@substring(concat(activity('Get Traffic').output.childItems),9,19)",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
@@ -716,14 +722,8 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "RestResourceTraffic",
-									"type": "DatasetReference",
-									"parameters": {
-										"lastMonth": {
-											"value": "@substring(concat(activity('Get Traffic').output.childItems),9,19)",
-											"type": "Expression"
-										}
-									}
+									"referenceName": "RestResourceTrafficAll",
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
