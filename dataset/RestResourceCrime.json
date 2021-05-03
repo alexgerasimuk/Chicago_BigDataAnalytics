@@ -1,0 +1,12 @@
+{
+	"name": "RestResourceCrime",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestServiceCrime",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
