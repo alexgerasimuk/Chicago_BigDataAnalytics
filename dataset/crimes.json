@@ -19,7 +19,7 @@
 					"value": "@dataset().CrimesFileName",
 					"type": "Expression"
 				},
-				"folderPath": "crime",
+				"folderPath": "crime/latest",
 				"container": "chicago"
 			}
 		},
