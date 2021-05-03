@@ -630,7 +630,7 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
-										"wildcardFolderPath": "traffic/latest",
+										"wildcardFolderPath": "crime/latest",
 										"wildcardFileName": "*",
 										"enablePartitionDiscovery": false
 									},
@@ -676,7 +676,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "LatestTraffic",
+									"referenceName": "LatestCrimes",
 									"type": "DatasetReference"
 								},
 								"enableLogging": false,
@@ -768,7 +768,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "LatestTraffic",
+									"referenceName": "LatestPermit",
 									"type": "DatasetReference"
 								},
 								"enableLogging": false,
