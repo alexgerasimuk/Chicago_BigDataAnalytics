@@ -599,9 +599,12 @@
 						"referenceName": "AllCrimes",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -622,6 +625,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "@empty(activity('Get Crimes').output.childItems)",
+						"type": "Expression"
+					},
 					"ifFalseActivities": [
 						{
 							"name": "move latest crimes",
@@ -676,7 +683,14 @@
 						{
 							"name": "Delete latest crimes",
 							"type": "Delete",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "move latest crimes",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -714,6 +728,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "@empty(activity('Get Permits').output.childItems)",
+						"type": "Expression"
+					},
 					"ifFalseActivities": [
 						{
 							"name": "move latest permits",
@@ -768,7 +786,14 @@
 						{
 							"name": "Delete latest permits",
 							"type": "Delete",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "move latest permits",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -810,9 +835,12 @@
 						"referenceName": "AllPermits",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
