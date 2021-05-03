@@ -1,12 +1,6 @@
 {
 	"name": "RestServiceTraffic",
 	"properties": {
-		"parameters": {
-			"lastMonthSub": {
-				"type": "string",
-				"defaultValue": "@substring(concat(activity('GetLattestTraffic').output.childItems),8,19)"
-			}
-		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
