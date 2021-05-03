@@ -19,7 +19,7 @@
 					"value": "@dataset().PermitsFileName",
 					"type": "Expression"
 				},
-				"folderPath": "permit",
+				"folderPath": "permit/latest",
 				"container": "chicago"
 			}
 		},
