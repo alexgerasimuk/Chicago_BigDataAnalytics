@@ -375,7 +375,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@not(contains(activity('Get Traffic').output.childItems.name, 'latest'))",
+						"value": "@not(contains(activity('Get Traffic').output.childItems, 'latest'))",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
