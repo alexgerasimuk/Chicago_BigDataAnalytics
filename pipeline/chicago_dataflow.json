@@ -610,7 +610,7 @@
 						"referenceName": "RestResourceTraffic",
 						"type": "DatasetReference",
 						"parameters": {
-							"lastMonthSub": "@substring(concat(activity('GetLattestTraffic').output.childItems),0,19)"
+							"lastMonthSub": "@substring(concat(activity('GetLattestTraffic').output.childItems),1,19)"
 						}
 					}
 				],
