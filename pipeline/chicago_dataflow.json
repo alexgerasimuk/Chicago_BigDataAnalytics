@@ -465,7 +465,7 @@
 				}
 			},
 			{
-				"name": "Copy traffic",
+				"name": "Copy traffic_copy1",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -595,7 +595,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"fieldList": []
+					"dataset": {
+						"referenceName": "AllCrimes",
+						"type": "DatasetReference"
+					},
+					"fieldList": [],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "JsonReadSettings"
+					}
 				}
 			},
 			{
@@ -630,7 +641,7 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
-										"wildcardFolderPath": "crime/latest",
+										"wildcardFolderPath": "traffic/latest",
 										"wildcardFileName": "*",
 										"enablePartitionDiscovery": false
 									},
@@ -676,7 +687,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "LatestCrimes",
+									"referenceName": "LatestTraffic",
 									"type": "DatasetReference"
 								},
 								"enableLogging": false,
@@ -768,7 +779,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "LatestPermit",
+									"referenceName": "LatestTraffic",
 									"type": "DatasetReference"
 								},
 								"enableLogging": false,
@@ -795,7 +806,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"fieldList": []
+					"dataset": {
+						"referenceName": "AllPermits",
+						"type": "DatasetReference"
+					},
+					"fieldList": [],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "JsonReadSettings"
+					}
 				}
 			}
 		],

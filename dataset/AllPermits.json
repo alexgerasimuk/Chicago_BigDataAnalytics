@@ -1,0 +1,19 @@
+{
+	"name": "AllPermits",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TrafficsMetadata",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "permit",
+				"container": "chicago"
+			}
+		},
+		"schema": {}
+	}
+}
