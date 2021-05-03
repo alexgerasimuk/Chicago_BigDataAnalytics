@@ -5,11 +5,6 @@
 			"referenceName": "RestServiceTraffic",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"lastMonthSub": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
