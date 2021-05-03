@@ -496,139 +496,13 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
 									"type": "JsonReadSettings"
 								}
 							}
-						},
-						{
-							"name": "Copy traffic_copy1",
-							"type": "Copy",
-							"dependsOn": [
-								{
-									"activity": "latestDate",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"source": {
-									"type": "RestSource",
-									"httpRequestTimeout": "00:01:40",
-									"requestInterval": "00.00:00:00.010",
-									"requestMethod": "GET"
-								},
-								"sink": {
-									"type": "JsonSink",
-									"storeSettings": {
-										"type": "AzureBlobStorageWriteSettings",
-										"blockSizeInMB": 100
-									},
-									"formatSettings": {
-										"type": "JsonWriteSettings",
-										"filePattern": "arrayOfObjects"
-									}
-								},
-								"enableStaging": false,
-								"logSettings": {
-									"enableCopyActivityLog": true,
-									"copyActivityLogSettings": {
-										"logLevel": "Info",
-										"enableReliableLogging": false
-									},
-									"logLocationSettings": {
-										"linkedServiceName": {
-											"referenceName": "loggingService",
-											"type": "LinkedServiceReference"
-										},
-										"path": "chicago"
-									}
-								},
-								"translator": {
-									"type": "TabularTranslator",
-									"mappings": [
-										{
-											"source": {
-												"path": "$['time']"
-											},
-											"sink": {
-												"path": "time"
-											}
-										},
-										{
-											"source": {
-												"path": "$['region_id']"
-											},
-											"sink": {
-												"path": "region_id"
-											}
-										},
-										{
-											"source": {
-												"path": "$['region']"
-											},
-											"sink": {
-												"path": "region"
-											}
-										},
-										{
-											"source": {
-												"path": "$['speed']"
-											},
-											"sink": {
-												"path": "speed"
-											}
-										},
-										{
-											"source": {
-												"path": "$['bus_count']"
-											},
-											"sink": {
-												"path": "bus_count"
-											}
-										}
-									]
-								}
-							},
-							"inputs": [
-								{
-									"referenceName": "RestResourceTraffic",
-									"type": "DatasetReference"
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "traffic",
-									"type": "DatasetReference",
-									"parameters": {
-										"TargetFileName": {
-											"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
-											"type": "Expression"
-										},
-										"lastMonth": {
-											"value": "@substring(concat(activity('GetLattestTraffic').output.childItems)),8,19)",
-											"type": "Expression"
-										}
-									}
-								}
-							]
-						},
-						{
-							"name": "latestDate",
-							"description": "",
-							"type": "SetVariable",
-							"dependsOn": []
 						}
 					]
 				}
@@ -734,7 +608,10 @@
 				"inputs": [
 					{
 						"referenceName": "RestResourceTraffic",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"lastMonthSub": "@substring(concat(activity('GetLattestTraffic').output.childItems),8,19)"
+						}
 					}
 				],
 				"outputs": [
@@ -745,8 +622,7 @@
 							"TargetFileName": {
 								"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
 								"type": "Expression"
-							},
-							"lastMonth": "@getPastTime(1,'Month')"
+							}
 						}
 					}
 				]

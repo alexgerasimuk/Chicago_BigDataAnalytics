@@ -3,13 +3,7 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "RestServiceTraffic",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"lastMonth": {
-					"value": "@substring(concat(activity('GetLattestTraffic').output.childItems),8,19)",
-					"type": "Expression"
-				}
-			}
+			"type": "LinkedServiceReference"
 		},
 		"parameters": {
 			"lastMonthSub": {

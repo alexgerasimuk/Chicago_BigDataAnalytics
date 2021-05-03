@@ -8,9 +8,6 @@
 		"parameters": {
 			"TargetFileName": {
 				"type": "string"
-			},
-			"lastMonth": {
-				"type": "string"
 			}
 		},
 		"annotations": [],
