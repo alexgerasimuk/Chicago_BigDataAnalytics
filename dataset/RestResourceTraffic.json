@@ -6,9 +6,15 @@
 			"type": "LinkedServiceReference",
 			"parameters": {
 				"lastMonth": {
-					"value": "@substring(concat(@activity('Get Crimes').output.childItems)),8,19)",
+					"value": "@substring(concat(activity('GetLattestTraffic').output.childItems),8,19)",
 					"type": "Expression"
 				}
+			}
+		},
+		"parameters": {
+			"lastMonthSub": {
+				"type": "string",
+				"defaultValue": "@substring(concat(activity('GetLattestTraffic').output.childItems),8,19)"
 			}
 		},
 		"annotations": [],
