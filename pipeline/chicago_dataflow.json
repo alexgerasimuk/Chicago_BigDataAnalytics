@@ -375,7 +375,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@empty(activity('Get Traffic').output.childItems)",
+						"value": "@empty(activity('Get Traffic').output.childItems.latest)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -626,7 +626,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@empty(activity('Get Crimes').output.childItems)",
+						"value": "@empty(activity('Get Crimes').output.childItems.latest)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
