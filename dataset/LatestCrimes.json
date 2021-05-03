@@ -1,5 +1,5 @@
 {
-	"name": "LatestTraffic",
+	"name": "LatestCrimes",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "copyToArchive",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "traffic/latest",
+				"folderPath": "crime/latest",
 				"container": "chicago"
 			}
 		},
