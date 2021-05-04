@@ -77,7 +77,7 @@
 		},
 		"RestServiceCrime_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=60000"
+			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=600000000000"
 		},
 		"RestServiceCrimeAll_properties_typeProperties_url": {
 			"type": "string",
@@ -93,7 +93,7 @@
 		},
 		"RestServicePermitAll_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000"
+			"defaultValue": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=600000000000"
 		},
 		"RestServiceTraffic_properties_typeProperties_url": {
 			"type": "string",
@@ -1777,7 +1777,7 @@
 				"type": "RestResource",
 				"typeProperties": {
 					"relativeUrl": {
-						"value": "@concat('?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=60000&$where=date >', '\"', substring(dataset().lastMonthSub,9,10), '\"' )",
+						"value": "@concat('?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=600000000000&$where=date >', '\"', substring(dataset().lastMonthSub,9,10), '\"' )",
 						"type": "Expression"
 					}
 				},
@@ -1823,7 +1823,7 @@
 				"type": "RestResource",
 				"typeProperties": {
 					"relativeUrl": {
-						"value": "@concat('building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000&$where=issue_date > ', '\"', substring(dataset().lastMonthSub,10,10), '\"' )\n\n",
+						"value": "@concat('building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=600000000000&$where=issue_date > ', '\"', substring(dataset().lastMonthSub,10,10), '\"' )\n\n",
 						"type": "Expression"
 					}
 				},
