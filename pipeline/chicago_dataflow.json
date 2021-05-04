@@ -922,7 +922,7 @@
 									"referenceName": "crimes",
 									"type": "DatasetReference",
 									"parameters": {
-										"CrimesFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
+										"CrimesFileName": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
 									}
 								}
 							]
