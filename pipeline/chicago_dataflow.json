@@ -1232,10 +1232,10 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "AllPermits",
+									"referenceName": "permits",
 									"type": "DatasetReference",
 									"parameters": {
-										"targetFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
+										"PermitsFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
 									}
 								}
 							]
