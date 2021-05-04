@@ -1021,7 +1021,23 @@
 										"filePattern": "arrayOfObjects"
 									}
 								},
-								"enableStaging": false
+								"enableStaging": false,
+								"enableSkipIncompatibleRow": true,
+								"validateDataConsistency": true,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Warning",
+										"enableReliableLogging": true
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "loggingService",
+											"type": "LinkedServiceReference"
+										},
+										"path": "chicago"
+									}
+								}
 							},
 							"inputs": [
 								{
