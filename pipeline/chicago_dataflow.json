@@ -1163,13 +1163,10 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "crimes",
+									"referenceName": "AllCrimes",
 									"type": "DatasetReference",
 									"parameters": {
-										"CrimesFileName": {
-											"value": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
-											"type": "Expression"
-										}
+										"crimesFileName": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
 									}
 								}
 							]
