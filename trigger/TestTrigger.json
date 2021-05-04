@@ -20,10 +20,10 @@
 				"timeZone": "Central European Standard Time",
 				"schedule": {
 					"minutes": [
-						45
+						2
 					],
 					"hours": [
-						20
+						21
 					],
 					"monthDays": [
 						4
