@@ -621,7 +621,7 @@
 									"enableCopyActivityLog": true,
 									"copyActivityLogSettings": {
 										"logLevel": "Warning",
-										"enableReliableLogging": true
+										"enableReliableLogging": false
 									},
 									"logLocationSettings": {
 										"linkedServiceName": {
@@ -1081,11 +1081,13 @@
 									}
 								},
 								"enableStaging": false,
+								"enableSkipIncompatibleRow": true,
+								"validateDataConsistency": true,
 								"logSettings": {
 									"enableCopyActivityLog": true,
 									"copyActivityLogSettings": {
-										"logLevel": "Info",
-										"enableReliableLogging": false
+										"logLevel": "Warning",
+										"enableReliableLogging": true
 									},
 									"logLocationSettings": {
 										"linkedServiceName": {
