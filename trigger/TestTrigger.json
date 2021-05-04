@@ -14,10 +14,21 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Minute",
-				"interval": 15,
-				"startTime": "2021-05-04T18:30:00Z",
-				"timeZone": "UTC"
+				"frequency": "Month",
+				"interval": 1,
+				"startTime": "2021-05-04T18:30:00",
+				"timeZone": "Central European Standard Time",
+				"schedule": {
+					"minutes": [
+						30
+					],
+					"hours": [
+						20
+					],
+					"monthDays": [
+						4
+					]
+				}
 			}
 		}
 	}
