@@ -207,7 +207,7 @@
 									}
 								},
 								"enableStaging": false,
-								"enableSkipIncompatibleRow": false,
+								"enableSkipIncompatibleRow": true,
 								"validateDataConsistency": true,
 								"logSettings": {
 									"enableCopyActivityLog": true,
