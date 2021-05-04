@@ -5,6 +5,11 @@
 			"referenceName": "RestServiceCrimeAll",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"lastMonthSub": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"schema": []

@@ -793,7 +793,14 @@
 						{
 							"name": "move latest crimes",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "GetLattestCrimes",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -871,6 +878,295 @@
 									"enablePartitionDiscovery": false
 								}
 							}
+						},
+						{
+							"name": "GetLattestCrimes",
+							"type": "GetMetadata",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "LatestCrimes",
+									"type": "DatasetReference"
+								},
+								"fieldList": [
+									"childItems"
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							}
+						},
+						{
+							"name": "Copy crimes with date",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Delete latest crimes",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings",
+										"filePattern": "arrayOfObjects"
+									}
+								},
+								"enableStaging": false,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Info",
+										"enableReliableLogging": false
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "loggingService",
+											"type": "LinkedServiceReference"
+										},
+										"path": "chicago"
+									}
+								},
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['id']"
+											},
+											"sink": {
+												"path": "id"
+											}
+										},
+										{
+											"source": {
+												"path": "$['date']"
+											},
+											"sink": {
+												"path": "date"
+											}
+										},
+										{
+											"source": {
+												"path": "$['year']"
+											},
+											"sink": {
+												"path": "year"
+											}
+										},
+										{
+											"source": {
+												"path": "$['domestic']"
+											},
+											"sink": {
+												"path": "domestic"
+											}
+										},
+										{
+											"source": {
+												"path": "$['arrest']"
+											},
+											"sink": {
+												"path": "arrest"
+											}
+										},
+										{
+											"source": {
+												"path": "$['community_area']"
+											},
+											"sink": {
+												"path": "community_area"
+											}
+										},
+										{
+											"source": {
+												"path": "$['primary_type']"
+											},
+											"sink": {
+												"path": "primary_type"
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "RestResourceCrime",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "crimes",
+									"type": "DatasetReference",
+									"parameters": {
+										"CrimesFileName": {
+											"value": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Copy crimes all",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings",
+										"filePattern": "arrayOfObjects"
+									}
+								},
+								"enableStaging": false,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Info",
+										"enableReliableLogging": false
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "loggingService",
+											"type": "LinkedServiceReference"
+										},
+										"path": "chicago"
+									}
+								},
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['id']"
+											},
+											"sink": {
+												"path": "id"
+											}
+										},
+										{
+											"source": {
+												"path": "$['date']"
+											},
+											"sink": {
+												"path": "date"
+											}
+										},
+										{
+											"source": {
+												"path": "$['year']"
+											},
+											"sink": {
+												"path": "year"
+											}
+										},
+										{
+											"source": {
+												"path": "$['domestic']"
+											},
+											"sink": {
+												"path": "domestic"
+											}
+										},
+										{
+											"source": {
+												"path": "$['arrest']"
+											},
+											"sink": {
+												"path": "arrest"
+											}
+										},
+										{
+											"source": {
+												"path": "$['community_area']"
+											},
+											"sink": {
+												"path": "community_area"
+											}
+										},
+										{
+											"source": {
+												"path": "$['primary_type']"
+											},
+											"sink": {
+												"path": "primary_type"
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "RestResourceCrimes",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "crimes",
+									"type": "DatasetReference",
+									"parameters": {
+										"CrimesFileName": {
+											"value": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
 					]
 				}
