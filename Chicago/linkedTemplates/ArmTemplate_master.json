@@ -67,10 +67,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'loggingService'"
 		},
-		"RestServiceTrafficAll_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'RestServiceTrafficAll'"
-		},
 		"HttpServerTraffic_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth"
@@ -79,17 +75,33 @@
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=community_area,community_area_number,property_type,units"
 		},
+		"RestServiceCrime_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=60000"
+		},
+		"RestServiceCrimeAll_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json"
+		},
 		"RestServiceCrimes_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=60000&$where=date > '2021-01-01T00:00:00'"
 		},
 		"RestServicePermit_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000&$where=issue_date > '2021-01-01T00:00:00'"
+			"defaultValue": "https://data.cityofchicago.org/resource/"
+		},
+		"RestServicePermitAll_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000"
 		},
 		"RestServiceTraffic_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.cityofchicago.org/resource/"
+		},
+		"RestServiceTrafficAll_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=600000000000"
 		},
 		"TrafficRestService_properties_typeProperties_url": {
 			"type": "string",
@@ -98,14 +110,6 @@
 		"loggingService_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://csb10033fff9b4dbb74.dfs.core.windows.net"
-		},
-		"RestServiceTrafficAll_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=600000000000"
-		},
-		"RestServiceTrafficAll_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "235010@student.pwr.edu.pl"
 		},
 		"containerUri": {
 			"type": "string",
@@ -164,23 +168,17 @@
 					"TrafficBlob_connectionString": {
 						"value": "[parameters('TrafficBlob_connectionString')]"
 					},
-					"TrafficsMetadata_connectionString": {
-						"value": "[parameters('TrafficsMetadata_connectionString')]"
-					},
-					"copyToArchive_connectionString": {
-						"value": "[parameters('copyToArchive_connectionString')]"
-					},
-					"copyToArchiveCrime_connectionString": {
-						"value": "[parameters('copyToArchiveCrime_connectionString')]"
-					},
-					"copyToArchiveTraffic_connectionString": {
-						"value": "[parameters('copyToArchiveTraffic_connectionString')]"
-					},
 					"HttpServerTraffic_properties_typeProperties_url": {
 						"value": "[parameters('HttpServerTraffic_properties_typeProperties_url')]"
 					},
 					"RestServiceAffordableHousing_properties_typeProperties_url": {
 						"value": "[parameters('RestServiceAffordableHousing_properties_typeProperties_url')]"
+					},
+					"RestServiceCrime_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceCrime_properties_typeProperties_url')]"
+					},
+					"RestServiceCrimeAll_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceCrimeAll_properties_typeProperties_url')]"
 					},
 					"RestServiceCrimes_properties_typeProperties_url": {
 						"value": "[parameters('RestServiceCrimes_properties_typeProperties_url')]"
@@ -188,8 +186,14 @@
 					"RestServicePermit_properties_typeProperties_url": {
 						"value": "[parameters('RestServicePermit_properties_typeProperties_url')]"
 					},
+					"RestServicePermitAll_properties_typeProperties_url": {
+						"value": "[parameters('RestServicePermitAll_properties_typeProperties_url')]"
+					},
 					"RestServiceTraffic_properties_typeProperties_url": {
 						"value": "[parameters('RestServiceTraffic_properties_typeProperties_url')]"
+					},
+					"RestServiceTrafficAll_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceTrafficAll_properties_typeProperties_url')]"
 					},
 					"TrafficRestService_properties_typeProperties_url": {
 						"value": "[parameters('TrafficRestService_properties_typeProperties_url')]"
@@ -212,20 +216,23 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"TrafficsMetadata_connectionString": {
+						"value": "[parameters('TrafficsMetadata_connectionString')]"
+					},
+					"copyToArchive_connectionString": {
+						"value": "[parameters('copyToArchive_connectionString')]"
+					},
+					"copyToArchiveCrime_connectionString": {
+						"value": "[parameters('copyToArchiveCrime_connectionString')]"
+					},
+					"copyToArchiveTraffic_connectionString": {
+						"value": "[parameters('copyToArchiveTraffic_connectionString')]"
+					},
 					"loggingService_accountKey": {
 						"value": "[parameters('loggingService_accountKey')]"
 					},
-					"RestServiceTrafficAll_password": {
-						"value": "[parameters('RestServiceTrafficAll_password')]"
-					},
 					"loggingService_properties_typeProperties_url": {
 						"value": "[parameters('loggingService_properties_typeProperties_url')]"
-					},
-					"RestServiceTrafficAll_properties_typeProperties_url": {
-						"value": "[parameters('RestServiceTrafficAll_properties_typeProperties_url')]"
-					},
-					"RestServiceTrafficAll_properties_typeProperties_userName": {
-						"value": "[parameters('RestServiceTrafficAll_properties_typeProperties_userName')]"
 					}
 				}
 			},
