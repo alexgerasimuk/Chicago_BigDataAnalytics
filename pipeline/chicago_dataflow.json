@@ -1025,7 +1025,13 @@
 							"inputs": [
 								{
 									"referenceName": "RestResourceCrime",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"lastMonthSub": {
+											"value": "@substring(concat(activity('GetLattestCrimes').output.childItems),9,19)",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
