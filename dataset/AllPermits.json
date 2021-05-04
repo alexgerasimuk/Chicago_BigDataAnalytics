@@ -5,6 +5,11 @@
 			"referenceName": "TrafficsMetadata",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"targetFileName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
