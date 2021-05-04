@@ -16,17 +16,17 @@
 			"recurrence": {
 				"frequency": "Month",
 				"interval": 1,
-				"startTime": "2021-05-05T04:00:00Z",
-				"timeZone": "UTC",
+				"startTime": "2021-05-05T04:00:00",
+				"timeZone": "Central European Standard Time",
 				"schedule": {
 					"minutes": [
 						0
 					],
 					"hours": [
-						2
+						4
 					],
 					"monthDays": [
-						1
+						5
 					]
 				}
 			}
