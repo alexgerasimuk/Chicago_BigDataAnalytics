@@ -2,7 +2,7 @@
 	"name": "AllCrimes",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "TrafficsMetadata",
+			"referenceName": "Metadata",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
