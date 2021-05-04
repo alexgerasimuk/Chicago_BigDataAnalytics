@@ -137,7 +137,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@not(contains(activity('Get Traffic').output.childItems, 'latest'))",
+						"value": "@contains(activity('Get Traffic').output.childItems, 'latest')",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -542,7 +542,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@contains(activity('Get Crimes').output.childItems, 'latest')",
+						"value": "@not(contains(activity('Get Crimes').output.childItems, 'latest'))",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -919,11 +919,8 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "crimes",
-									"type": "DatasetReference",
-									"parameters": {
-										"CrimesFileName": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
-									}
+									"referenceName": "AllCrimes",
+									"type": "DatasetReference"
 								}
 							]
 						}
@@ -1232,10 +1229,10 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "permits",
+									"referenceName": "AllPermits",
 									"type": "DatasetReference",
 									"parameters": {
-										"PermitsFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
+										"targetFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
 									}
 								}
 							]
