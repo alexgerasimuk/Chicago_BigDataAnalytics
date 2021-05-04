@@ -784,7 +784,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"lastMonthSub": {
-											"value": "@substring(concat(activity('GetLattestCrimes').output.childItems),6,19)",
+											"value": "@substring(concat(activity('GetLattestCrimes').output.childItems),7,19)",
 											"type": "Expression"
 										}
 									}
