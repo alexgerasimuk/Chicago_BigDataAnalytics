@@ -513,7 +513,10 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "AllCrimes",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"crimesFileName": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
+						}
 					},
 					"fieldList": [
 						"childItems"
