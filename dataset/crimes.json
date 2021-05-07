@@ -7,7 +7,8 @@
 		},
 		"parameters": {
 			"CrimesFileName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
 			}
 		},
 		"annotations": [],
