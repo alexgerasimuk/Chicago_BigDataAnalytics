@@ -716,7 +716,7 @@
 										{
 											"activity": "GetLattestCrimes",
 											"dependencyConditions": [
-												"Succeeded"
+												"Completed"
 											]
 										}
 									],
@@ -775,7 +775,7 @@
 										{
 											"activity": "move latest crimes",
 											"dependencyConditions": [
-												"Succeeded"
+												"Completed"
 											]
 										}
 									],
@@ -839,7 +839,7 @@
 										{
 											"activity": "Delete latest crimes",
 											"dependencyConditions": [
-												"Succeeded"
+												"Completed"
 											]
 										}
 									],
