@@ -1045,7 +1045,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"lastMonthSub": {
-											"value": "@substring(concat(activity('GetLattestPermit').output.childItems),7,19)",
+											"value": "@concat(activity('GetLattestPermit').output.childItems)",
 											"type": "Expression"
 										}
 									}
