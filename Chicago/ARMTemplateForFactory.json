@@ -1127,7 +1127,7 @@
 										{
 											"activity": "GetLattestPermit",
 											"dependencyConditions": [
-												"Succeeded"
+												"Completed"
 											]
 										}
 									],
@@ -1186,7 +1186,7 @@
 										{
 											"activity": "move latest permits",
 											"dependencyConditions": [
-												"Succeeded"
+												"Completed"
 											]
 										}
 									],
@@ -1250,7 +1250,7 @@
 										{
 											"activity": "Delete latest permits",
 											"dependencyConditions": [
-												"Succeeded"
+												"Completed"
 											]
 										}
 									],
