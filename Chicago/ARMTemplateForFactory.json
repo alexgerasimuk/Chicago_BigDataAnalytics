@@ -953,7 +953,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"lastMonthSub": {
-													"value": "@substring(concat(activity('GetLattestCrimes').output.childItems),7,19)",
+													"value": "@concat(activity('GetLattestCrimes').output.childItems)",
 													"type": "Expression"
 												}
 											}
@@ -1304,7 +1304,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"lastMonthSub": {
-													"value": "@substring(concat(activity('GetLattestPermit').output.childItems),7,19)",
+													"value": "@concat(activity('GetLattestPermit').output.childItems)",
 													"type": "Expression"
 												}
 											}
@@ -1777,7 +1777,7 @@
 				"type": "RestResource",
 				"typeProperties": {
 					"relativeUrl": {
-						"value": "@concat('?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=600000000000&$where=date >', '\"', substring(dataset().lastMonthSub,9,10), '\"' )",
+						"value": "@concat('?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=600000000000&$where=date >', '\"', substring(dataset().lastMonthSub,16,10), '\"' )",
 						"type": "Expression"
 					}
 				},
@@ -1823,7 +1823,7 @@
 				"type": "RestResource",
 				"typeProperties": {
 					"relativeUrl": {
-						"value": "@concat('building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=600000000000&$where=issue_date > ', '\"', substring(dataset().lastMonthSub,9,10), '\"' )\n\n",
+						"value": "@concat('building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=600000000000&$where=issue_date > ', '\"', substring(dataset().lastMonthSub,16,10), '\"' )",
 						"type": "Expression"
 					}
 				},
