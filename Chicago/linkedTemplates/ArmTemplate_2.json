@@ -1685,13 +1685,14 @@
 						"timeZone": "Central European Standard Time",
 						"schedule": {
 							"minutes": [
-								4
+								9
 							],
 							"hours": [
-								21
+								11
 							],
 							"monthDays": [
-								4
+								4,
+								10
 							]
 						}
 					}
