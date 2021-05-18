@@ -650,7 +650,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"TargetFileName": {
-													"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH_mm_ss'), '.json')",
+													"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-dd+HH_mm_ss'), '.json')",
 													"type": "Expression"
 												}
 											}
@@ -953,7 +953,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"lastMonthSub": {
-													"value": "@concat(activity('GetLattestCrimes').output.childItems)",
+													"value": "@replace(replace(concat(activity('GetLattestCrimes').output.childItems), '_', ':'), '+', 'T')",
 													"type": "Expression"
 												}
 											}
@@ -965,7 +965,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"CrimesFileName": {
-													"value": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+													"value": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-dd+HH_mm_ss'))",
 													"type": "Expression"
 												}
 											}
@@ -1094,7 +1094,7 @@
 											"referenceName": "crimes",
 											"type": "DatasetReference",
 											"parameters": {
-												"CrimesFileName": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
+												"CrimesFileName": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-dd+HH_mm_ss'), '.json')"
 											}
 										}
 									]
@@ -1304,7 +1304,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"lastMonthSub": {
-													"value": "@concat(activity('GetLattestPermit').output.childItems)",
+													"value": "@replace(replace(concat(activity('GetLattestPermit').output.childItems), '_', ':'), '+', 'T')\n",
 													"type": "Expression"
 												}
 											}
@@ -1316,7 +1316,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"PermitsFileName": {
-													"value": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+													"value": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-dd+HH_mm_ss'))",
 													"type": "Expression"
 												}
 											}
@@ -1430,7 +1430,7 @@
 											"referenceName": "permits",
 											"type": "DatasetReference",
 											"parameters": {
-												"PermitsFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
+												"PermitsFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-dd+HH_mm_ss'))"
 											}
 										}
 									]
