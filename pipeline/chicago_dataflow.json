@@ -275,7 +275,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"lastMonthSub": {
-											"value": "@substring(concat(activity('GetLattestTraffic').output.childItems),9,19)",
+											"value": "@replace(substring(concat(activity('GetLattestTraffic').output.childItems),9,19), '_', ':')",
 											"type": "Expression"
 										}
 									}
@@ -287,7 +287,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"TargetFileName": {
-											"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH-mm-ss'),'.json')",
+											"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH_mm_ss'),'.json')",
 											"type": "Expression"
 										}
 									}
@@ -401,7 +401,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"TargetFileName": {
-											"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH-mm-ss'), '.json')",
+											"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH_mm_ss'), '.json')",
 											"type": "Expression"
 										}
 									}
