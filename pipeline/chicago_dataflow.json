@@ -401,7 +401,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"TargetFileName": {
-											"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH_mm_ss'), '.json')",
+											"value": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-dd+HH_mm_ss'), '.json')",
 											"type": "Expression"
 										}
 									}
