@@ -699,7 +699,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"lastMonthSub": {
-											"value": "@concat(activity('GetLattestCrimes').output.childItems)",
+											"value": "@replace(replace(concat(activity('GetLattestCrimes').output.childItems), '_', ':'), '+', 'T')",
 											"type": "Expression"
 										}
 									}
@@ -711,7 +711,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"CrimesFileName": {
-											"value": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))",
+											"value": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-dd+HH_mm_ss'))",
 											"type": "Expression"
 										}
 									}
