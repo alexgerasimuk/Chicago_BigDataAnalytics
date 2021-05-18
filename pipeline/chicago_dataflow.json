@@ -1212,9 +1212,54 @@
 				}
 			},
 			{
-				"name": "Notebook1",
+				"name": "Z2",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
+					{
+						"activity": "If latest for crimes is empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "If latest for permits is empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/238039@student.pwr.edu.pl/Z2",
+					"baseParameters": {
+						"input": "@pipeline().parameters.inputPath",
+						"output": "@pipeline().parameters.outputPath",
+						"filename": "@pipeline().parameters.fileName",
+						"pipelineRunId": "@pipeline().RunId"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Z1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "If latest for permits is empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
 					{
 						"activity": "If latest for traffic is empty",
 						"dependencyConditions": [
@@ -1230,6 +1275,60 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/235010@student.pwr.edu.pl/Z1",
+					"baseParameters": {
+						"input": "@pipeline().parameters.inputPath",
+						"output": "@pipeline().parameters.outputPath",
+						"filename": "@pipeline().parameters.fileName",
+						"pipelineRunId": "@pipeline().RunId"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Z3",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "If latest for traffic is empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "If latest for crimes is empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "If latest for permits is empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/235735@student.pwr.edu.pl/Z3",
+					"baseParameters": {
+						"input": "@pipeline().parameters.inputPath",
+						"output": "@pipeline().parameters.outputPath",
+						"filename": "@pipeline().parameters.fileName",
+						"pipelineRunId": "@pipeline().RunId"
+					}
+				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks",
 					"type": "LinkedServiceReference"
