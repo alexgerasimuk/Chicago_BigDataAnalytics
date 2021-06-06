@@ -1290,18 +1290,6 @@
 				"typeProperties": {
 					"notebookPath": "/Users/235010@student.pwr.edu.pl/Z1",
 					"baseParameters": {
-						"input": {
-							"value": "@pipeline().parameters.inputPath",
-							"type": "Expression"
-						},
-						"output": {
-							"value": "@pipeline().parameters.outputPath",
-							"type": "Expression"
-						},
-						"filename": {
-							"value": "@pipeline().parameters.fileName",
-							"type": "Expression"
-						},
 						"pipelineRunId": {
 							"value": "@pipeline().RunId",
 							"type": "Expression"
