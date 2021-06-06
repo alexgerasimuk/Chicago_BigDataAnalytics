@@ -1,0 +1,96 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "chicago"
+		},
+		"AffordableHousingBlob_connectionString": {
+			"value": ""
+		},
+		"AffordableHpusingBlob_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureDatabricks_accessToken": {
+			"value": ""
+		},
+		"AzureSqlDatabase_connectionString": {
+			"value": ""
+		},
+		"CopyToArchivePermit_connectionString": {
+			"value": ""
+		},
+		"CrimesBlob_connectionString": {
+			"value": ""
+		},
+		"Latest_connectionString": {
+			"value": ""
+		},
+		"Metadata_connectionString": {
+			"value": ""
+		},
+		"PermitsBlob_connectionString": {
+			"value": ""
+		},
+		"TrafficBlob_connectionString": {
+			"value": ""
+		},
+		"TrafficsMetadata_connectionString": {
+			"value": ""
+		},
+		"copyToArchive_connectionString": {
+			"value": ""
+		},
+		"copyToArchiveCrime_connectionString": {
+			"value": ""
+		},
+		"copyToArchiveTraffic_connectionString": {
+			"value": ""
+		},
+		"loggingService_accountKey": {
+			"value": ""
+		},
+		"HttpServerTraffic_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=2000&$where=time > @linkedService().lastMonth"
+		},
+		"RestServiceAffordableHousing_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/s6ha-ppgi.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=community_area,community_area_number,property_type,units"
+		},
+		"RestServiceCrime_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=600000000000"
+		},
+		"RestServiceCrimeAll_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/crimes.json"
+		},
+		"RestServiceCrimes_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/crimes.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=60000&$where=date > '2021-01-01T00:00:00'"
+		},
+		"RestServicePermit_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/"
+		},
+		"RestServicePermitAll_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=600000000000"
+		},
+		"RestServiceTraffic_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/"
+		},
+		"RestServiceTrafficAll_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=600000000000"
+		},
+		"TrafficRestService_properties_typeProperties_url": {
+			"value": "https://data.cityofchicago.org/resource/kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000"
+		},
+		"loggingService_properties_typeProperties_url": {
+			"value": "https://csb10033fff9b4dbb74.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
