@@ -97,7 +97,7 @@
 		},
 		"RestServicePermitAll_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=600000000000"
+			"defaultValue": "https://data.cityofchicago.org/resource/building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=60000000"
 		},
 		"RestServiceTraffic_properties_typeProperties_url": {
 			"type": "string",
