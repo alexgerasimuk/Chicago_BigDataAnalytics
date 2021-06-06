@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "AllTraffic",
+						"referenceName": "AllTraffics",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
