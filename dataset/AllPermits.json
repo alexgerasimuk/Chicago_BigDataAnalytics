@@ -2,7 +2,7 @@
 	"name": "AllPermits",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "PermitsBlob",
+			"referenceName": "TrafficsMetadata",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
