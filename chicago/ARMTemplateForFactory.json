@@ -1457,9 +1457,7 @@
 							"dataset": {
 								"referenceName": "AllPermits",
 								"type": "DatasetReference",
-								"parameters": {
-									"targetFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
-								}
+								"parameters": {}
 							},
 							"fieldList": [
 								"childItems"
@@ -1655,11 +1653,6 @@
 				"linkedServiceName": {
 					"referenceName": "TrafficsMetadata",
 					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"targetFileName": {
-						"type": "string"
-					}
 				},
 				"annotations": [],
 				"type": "Json",
