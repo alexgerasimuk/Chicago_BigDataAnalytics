@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "AllTraffic",
+						"referenceName": "AllTraffics",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -425,7 +425,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "AllCrime",
+						"referenceName": "AllCrimes",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -1191,7 +1191,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "AllPermit",
+						"referenceName": "AllPermits",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
