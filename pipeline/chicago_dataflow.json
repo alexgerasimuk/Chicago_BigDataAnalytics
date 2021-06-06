@@ -16,11 +16,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "traffic",
-						"type": "DatasetReference",
-						"parameters": {
-							"TargetFileName": "@concat('traffic_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
-						}
+						"referenceName": "AllTraffic",
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
@@ -428,11 +425,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "crimes",
-						"type": "DatasetReference",
-						"parameters": {
-							"CrimesFileName": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
-						}
+						"referenceName": "AllCrimes",
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
@@ -1197,10 +1191,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "permits",
+						"referenceName": "AllPermits",
 						"type": "DatasetReference",
 						"parameters": {
-							"PermitsFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
+							"targetFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
 						}
 					},
 					"fieldList": [
