@@ -1698,7 +1698,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "TrafficsMetadata",
+					"referenceName": "PermitsBlob",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -1710,10 +1710,13 @@
 						"container": "chicago"
 					}
 				},
-				"schema": {}
+				"schema": {
+					"type": "object",
+					"properties": {}
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/TrafficsMetadata')]"
+				"[concat(variables('factoryId'), '/linkedServices/PermitsBlob')]"
 			]
 		},
 		{
