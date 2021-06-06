@@ -1192,10 +1192,7 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "AllPermits",
-						"type": "DatasetReference",
-						"parameters": {
-							"targetFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
-						}
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
