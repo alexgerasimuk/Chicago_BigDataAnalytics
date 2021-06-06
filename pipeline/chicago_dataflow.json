@@ -1239,10 +1239,22 @@
 				"typeProperties": {
 					"notebookPath": "/Users/238039@student.pwr.edu.pl/Z2",
 					"baseParameters": {
-						"input": "@pipeline().parameters.inputPath",
-						"output": "@pipeline().parameters.outputPath",
-						"filename": "@pipeline().parameters.fileName",
-						"pipelineRunId": "@pipeline().RunId"
+						"input": {
+							"value": "@pipeline().parameters.inputPath",
+							"type": "Expression"
+						},
+						"output": {
+							"value": "@pipeline().parameters.outputPath",
+							"type": "Expression"
+						},
+						"filename": {
+							"value": "@pipeline().parameters.fileName",
+							"type": "Expression"
+						},
+						"pipelineRunId": {
+							"value": "@pipeline().RunId",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -1278,10 +1290,22 @@
 				"typeProperties": {
 					"notebookPath": "/Users/235010@student.pwr.edu.pl/Z1",
 					"baseParameters": {
-						"input": "@pipeline().parameters.inputPath",
-						"output": "@pipeline().parameters.outputPath",
-						"filename": "@pipeline().parameters.fileName",
-						"pipelineRunId": "@pipeline().RunId"
+						"input": {
+							"value": "@pipeline().parameters.inputPath",
+							"type": "Expression"
+						},
+						"output": {
+							"value": "@pipeline().parameters.outputPath",
+							"type": "Expression"
+						},
+						"filename": {
+							"value": "@pipeline().parameters.fileName",
+							"type": "Expression"
+						},
+						"pipelineRunId": {
+							"value": "@pipeline().RunId",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -1323,10 +1347,22 @@
 				"typeProperties": {
 					"notebookPath": "/Users/235735@student.pwr.edu.pl/Z3",
 					"baseParameters": {
-						"input": "@pipeline().parameters.inputPath",
-						"output": "@pipeline().parameters.outputPath",
-						"filename": "@pipeline().parameters.fileName",
-						"pipelineRunId": "@pipeline().RunId"
+						"input": {
+							"value": "@pipeline().parameters.inputPath",
+							"type": "Expression"
+						},
+						"output": {
+							"value": "@pipeline().parameters.outputPath",
+							"type": "Expression"
+						},
+						"filename": {
+							"value": "@pipeline().parameters.fileName",
+							"type": "Expression"
+						},
+						"pipelineRunId": {
+							"value": "@pipeline().RunId",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
