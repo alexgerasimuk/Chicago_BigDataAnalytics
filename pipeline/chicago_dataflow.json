@@ -1155,42 +1155,34 @@
 									"mappings": [
 										{
 											"source": {
-												"path": "$['time']"
+												"path": "$['id']"
 											},
 											"sink": {
-												"path": "time"
+												"path": "$['id']"
 											}
 										},
 										{
 											"source": {
-												"path": "$['region_id']"
+												"path": "$['permit_type']"
 											},
 											"sink": {
-												"path": "region_id"
+												"path": "$['permit_type']"
 											}
 										},
 										{
 											"source": {
-												"path": "$['region']"
+												"path": "$['issue_date']"
 											},
 											"sink": {
-												"path": "region"
+												"path": "$['issue_date']"
 											}
 										},
 										{
 											"source": {
-												"path": "$['speed']"
+												"path": "$['community_area']"
 											},
 											"sink": {
-												"path": "speed"
-											}
-										},
-										{
-											"source": {
-												"path": "$['bus_count']"
-											},
-											"sink": {
-												"path": "bus_count"
+												"path": "$['community_area']"
 											}
 										}
 									]
