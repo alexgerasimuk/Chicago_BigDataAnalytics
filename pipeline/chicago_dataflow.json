@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "AllTraffics",
+						"referenceName": "AllTraffic",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -1037,6 +1037,43 @@
 										},
 										"path": "chicago"
 									}
+								},
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['id']"
+											},
+											"sink": {
+												"path": "$['id']"
+											}
+										},
+										{
+											"source": {
+												"path": "$['permit_type']"
+											},
+											"sink": {
+												"path": "$['permit_type']"
+											}
+										},
+										{
+											"source": {
+												"path": "$['issue_date']"
+											},
+											"sink": {
+												"path": "$['issue_date']"
+											}
+										},
+										{
+											"source": {
+												"path": "$['community_area']"
+											},
+											"sink": {
+												"path": "$['community_area']"
+											}
+										}
+									]
 								}
 							},
 							"inputs": [
