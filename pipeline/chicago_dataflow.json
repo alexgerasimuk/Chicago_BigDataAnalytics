@@ -424,7 +424,20 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"fieldList": []
+					"dataset": {
+						"referenceName": "AllCrime",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "JsonReadSettings"
+					}
 				}
 			},
 			{
@@ -1178,11 +1191,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "AllPermits",
-						"type": "DatasetReference",
-						"parameters": {
-							"targetFileName": "@concat('permit_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
-						}
+						"referenceName": "AllPermit",
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
