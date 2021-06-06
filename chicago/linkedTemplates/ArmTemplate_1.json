@@ -211,8 +211,7 @@
 					}
 				},
 				"schema": {
-					"type": "object",
-					"properties": {}
+					"type": "object"
 				}
 			},
 			"dependsOn": [

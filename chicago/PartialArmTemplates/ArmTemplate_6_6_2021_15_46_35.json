@@ -13,454 +13,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/RestResourceCrime')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServiceCrimeAll",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"lastMonthSub": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": {
-						"value": "@concat('?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,date, year, community_area, primary_type, arrest, domestic&$limit=600000000000&$where=date >', '\"', substring(dataset().lastMonthSub,17,10), '\"' )",
-						"type": "Expression"
-					}
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestResourceCrimes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServiceCrime",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestResourcePermit')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServicePermit",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"lastMonthSub": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": {
-						"value": "@concat('building-permits.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=id,permit_type,issue_date,community_area&$limit=600000000000&$where=issue_date > ', '\"', substring(dataset().lastMonthSub,17,10), '\"' )",
-						"type": "Expression"
-					}
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestResourcePermitAll')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServicePermitAll",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestResourceTraffic')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServiceTraffic",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"lastMonthSub": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": {
-						"value": "@concat('kf7e-cur8.json?$$app_token=30TDJtjsfHEEq1VbQq22pNhzy&$select=time, region_id, speed, region, bus_count&$limit=6000000&$where=time > ', '\"', substring(dataset().lastMonthSub,9,10), '\"' )",
-						"type": "Expression"
-					}
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestResourceTrafficAll')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServiceTrafficAll",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/affordableHousing')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AffordableHousingBlob",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"AFFileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().AFFileName",
-							"type": "Expression"
-						},
-						"folderPath": "affordableHousing",
-						"container": "chicago"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"community_area": {
-							"type": "string"
-						},
-						"community_area_number": {
-							"type": "string"
-						},
-						"property_type": {
-							"type": "string"
-						},
-						"units": {
-							"type": "string"
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/crimes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CrimesBlob",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"CrimesFileName": {
-						"type": "string",
-						"defaultValue": "@concat('crimes_',formatDateTime(pipeline().TriggerTime, 'yyyy-MM-ddTHH:mm:ss'))"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().CrimesFileName",
-							"type": "Expression"
-						},
-						"folderPath": "crime/latest",
-						"container": "chicago"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"date": {
-							"type": "string"
-						},
-						"year": {
-							"type": "string"
-						},
-						"community_area": {
-							"type": "string"
-						},
-						"primary_type": {
-							"type": "string"
-						},
-						"arrest": {
-							"type": "boolean"
-						},
-						"domestic": {
-							"type": "boolean"
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/permits')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "PermitsBlob",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"PermitsFileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().PermitsFileName",
-							"type": "Expression"
-						},
-						"folderPath": "permit/latest",
-						"container": "chicago"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"permit_type": {
-							"type": "string"
-						},
-						"issue_date": {
-							"type": "string"
-						},
-						"community_area": {
-							"type": "string"
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/traffic')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "TrafficBlob",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"TargetFileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().TargetFileName",
-							"type": "Expression"
-						},
-						"folderPath": "traffic/latest",
-						"container": "chicago"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"time": {
-							"type": "string"
-						},
-						"region_id": {
-							"type": "string"
-						},
-						"speed": {
-							"type": "string"
-						},
-						"region": {
-							"type": "string"
-						},
-						"bus_count": {
-							"type": "string"
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/aff_houses_pipeline')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy affordable housing",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "RestSource",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": "00.00:00:00.010",
-								"requestMethod": "GET"
-							},
-							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"validateDataConsistency": true,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": true
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "loggingService",
-										"type": "LinkedServiceReference"
-									},
-									"path": "chicago"
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['id']"
-										},
-										"sink": {
-											"path": "id"
-										}
-									},
-									{
-										"source": {
-											"path": "$['community_area']"
-										},
-										"sink": {
-											"path": "community_area"
-										}
-									},
-									{
-										"source": {
-											"path": "$['community_area_number']"
-										},
-										"sink": {
-											"path": "community_area_number"
-										}
-									},
-									{
-										"source": {
-											"path": "$['property_type']"
-										},
-										"sink": {
-											"path": "property_type"
-										}
-									},
-									{
-										"source": {
-											"path": "$['units']"
-										},
-										"sink": {
-											"path": "units"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "RestResourceAffordableHousing",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "affordableHousing",
-								"type": "DatasetReference",
-								"parameters": {
-									"AFFileName": "@concat('affordableHousing_', formatDateTime(pipeline().TriggerTime, 'MM-dd-yyyy_hh-mm-ss'))"
-								}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/affordableHousing')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/chicago_dataflow')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -481,8 +33,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "AllTraffic",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems"
@@ -562,15 +113,13 @@
 									"inputs": [
 										{
 											"referenceName": "LatestTraffic",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "ArchiveTraffic",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -596,8 +145,7 @@
 									"typeProperties": {
 										"dataset": {
 											"referenceName": "LatestTraffic",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										},
 										"enableLogging": false,
 										"storeSettings": {
@@ -622,8 +170,7 @@
 									"typeProperties": {
 										"dataset": {
 											"referenceName": "LatestTraffic",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										},
 										"fieldList": [
 											"childItems"
@@ -861,8 +408,7 @@
 									"inputs": [
 										{
 											"referenceName": "RestResourceTrafficAll",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
@@ -896,8 +442,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "AllCrimes",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems"
@@ -977,15 +522,13 @@
 									"inputs": [
 										{
 											"referenceName": "LatestCrimes",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "ArchiveCrime",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -1011,8 +554,7 @@
 									"typeProperties": {
 										"dataset": {
 											"referenceName": "LatestCrimes",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										},
 										"enableLogging": false,
 										"storeSettings": {
@@ -1037,8 +579,7 @@
 									"typeProperties": {
 										"dataset": {
 											"referenceName": "LatestCrimes",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										},
 										"fieldList": [
 											"childItems"
@@ -1306,8 +847,7 @@
 									"inputs": [
 										{
 											"referenceName": "RestResourceCrimes",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
@@ -1388,15 +928,13 @@
 									"inputs": [
 										{
 											"referenceName": "LatestPermit",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "ArchivePermit",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -1422,8 +960,7 @@
 									"typeProperties": {
 										"dataset": {
 											"referenceName": "LatestPermit",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										},
 										"enableLogging": false,
 										"storeSettings": {
@@ -1448,8 +985,7 @@
 									"typeProperties": {
 										"dataset": {
 											"referenceName": "LatestPermit",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										},
 										"fieldList": [
 											"childItems"
@@ -1679,8 +1215,7 @@
 									"inputs": [
 										{
 											"referenceName": "RestResourcePermitAll",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
@@ -1711,8 +1246,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "AllPermits",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems"
@@ -1853,100 +1387,7 @@
 				],
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/RestResourceTraffic')]",
-				"[concat(variables('factoryId'), '/datasets/traffic')]",
-				"[concat(variables('factoryId'), '/datasets/RestResourceTrafficAll')]",
-				"[concat(variables('factoryId'), '/datasets/RestResourceCrime')]",
-				"[concat(variables('factoryId'), '/datasets/crimes')]",
-				"[concat(variables('factoryId'), '/datasets/RestResourceCrimes')]",
-				"[concat(variables('factoryId'), '/datasets/RestResourcePermit')]",
-				"[concat(variables('factoryId'), '/datasets/permits')]",
-				"[concat(variables('factoryId'), '/datasets/RestResourcePermitAll')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OnceAMonth')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "chicago_dataflow",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Month",
-						"interval": 1,
-						"startTime": "2021-05-05T04:00:00",
-						"timeZone": "Central European Standard Time",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								4
-							],
-							"monthDays": [
-								5
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/chicago_dataflow')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TestTrigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "chicago_dataflow",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Month",
-						"interval": 1,
-						"startTime": "2021-05-04T18:30:00",
-						"timeZone": "Central European Standard Time",
-						"schedule": {
-							"minutes": [
-								9
-							],
-							"hours": [
-								11
-							],
-							"monthDays": [
-								4,
-								10
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/chicago_dataflow')]"
-			]
+			"dependsOn": []
 		}
 	]
 }

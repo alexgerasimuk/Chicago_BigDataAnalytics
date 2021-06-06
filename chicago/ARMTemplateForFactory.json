@@ -263,7 +263,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "AllTraffics",
+								"referenceName": "AllTraffic",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -1300,6 +1300,43 @@
 												},
 												"path": "chicago"
 											}
+										},
+										"translator": {
+											"type": "TabularTranslator",
+											"mappings": [
+												{
+													"source": {
+														"path": "$['id']"
+													},
+													"sink": {
+														"path": "$['id']"
+													}
+												},
+												{
+													"source": {
+														"path": "$['permit_type']"
+													},
+													"sink": {
+														"path": "$['permit_type']"
+													}
+												},
+												{
+													"source": {
+														"path": "$['issue_date']"
+													},
+													"sink": {
+														"path": "$['issue_date']"
+													}
+												},
+												{
+													"source": {
+														"path": "$['community_area']"
+													},
+													"sink": {
+														"path": "$['community_area']"
+													}
+												}
+											]
 										}
 									},
 									"inputs": [
@@ -1600,7 +1637,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AllTraffics')]",
+				"[concat(variables('factoryId'), '/datasets/AllTraffic')]",
 				"[concat(variables('factoryId'), '/datasets/AllCrimes')]",
 				"[concat(variables('factoryId'), '/datasets/AllPermits')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks')]",
@@ -1711,8 +1748,7 @@
 					}
 				},
 				"schema": {
-					"type": "object",
-					"properties": {}
+					"type": "object"
 				}
 			},
 			"dependsOn": [
